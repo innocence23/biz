@@ -847,7 +847,7 @@ info:
   license:
     name: MIT
     url: https://github.com/go-admin-team/maktub/blob/master/LICENSE.md
-  title: go-admin API
+  title: maktub API
   version: 2.0.0
 paths:
   /api/v1/app-config:

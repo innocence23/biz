@@ -167,7 +167,7 @@ cgo: exec gcc: exec: "gcc": executable file not found in %PATH%
 ``` bash
 # 首次配置需要初始化数据库资源信息
 # macOS or linux 下使用
-$ ./go-admin migrate -c=config/settings.dev.yml
+$ ./maktub migrate -c=config/settings.dev.yml
 
 # ⚠️注意:windows 下使用
 $ go-admin.exe migrate -c=config/settings.dev.yml
@@ -175,7 +175,7 @@ $ go-admin.exe migrate -c=config/settings.dev.yml
 
 # 启动项目，也可以用IDE进行调试
 # macOS or linux 下使用
-$ ./go-admin server -c config/settings.yml
+$ ./maktub server -c config/settings.yml
 
 
 # ⚠️注意:windows 下使用

@@ -1,7 +1,6 @@
 package global
 
 const (
-	// Version go-admin version info
 	Version = "2.0.6"
 )
 

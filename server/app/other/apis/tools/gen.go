@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"maktub/app/admin/service"
 	"maktub/app/admin/service/dto"
+	"os"
 	"strconv"
 	"strings"
 	"text/template"
@@ -222,6 +223,11 @@ func (e Gen) NOActionsGen(c *gin.Context, tab tools.SysTables) {
 	_ = pkg.PathCreate("./app/" + tab.PackageName + "/service/dto/")
 	_ = pkg.PathCreate(config.GenConfig.FrontPath + "/api/" + tab.PackageName + "/")
 	err = pkg.PathCreate(config.GenConfig.FrontPath + "/views/" + tab.PackageName + "/" + tab.MLTBName + "/")
+
+	info, err := os.Stat(config.GenConfig.FrontPath + "/views/" + tab.PackageName + "/" + tab.MLTBName + "/")
+
+	fmt.Println("========", info, err)
+	fmt.Println("========", config.GenConfig.FrontPath+"/views/"+tab.PackageName+"/"+tab.MLTBName+"/")
 	if err != nil {
 		log.Error(err)
 		e.Error(500, err, fmt.Sprintf("views目录创建失败！错误详情：%s", err.Error()))

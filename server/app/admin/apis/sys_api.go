@@ -33,12 +33,7 @@ type SysApi struct {
 func (e SysApi) GetPage(c *gin.Context) {
 	s := service.SysApi{}
 	req := dto.SysApiGetPageReq{}
-	err := e.MakeContext(c).
-		MakeOrm().
-		Bind(&req, binding.Form).
-		MakeService(&s.Service).
-		Errors
-	if err != nil {
+	if err := e.MakeContext(c).MakeOrm().Bind(&req, binding.Form).MakeService(&s.Service).Errors; err != nil {
 		e.Logger.Error(err)
 		e.Error(500, err, err.Error())
 		return
@@ -47,8 +42,7 @@ func (e SysApi) GetPage(c *gin.Context) {
 	p := actions.GetPermissionFromContext(c)
 	list := make([]models.SysApi, 0)
 	var count int64
-	err = s.GetPage(&req, p, &list, &count)
-	if err != nil {
+	if err := s.GetPage(&req, p, &list, &count); err != nil {
 		e.Error(500, err, "查询失败")
 		return
 	}
@@ -99,19 +93,13 @@ func (e SysApi) Get(c *gin.Context) {
 func (e SysApi) Update(c *gin.Context) {
 	req := dto.SysApiUpdateReq{}
 	s := service.SysApi{}
-	err := e.MakeContext(c).
-		MakeOrm().
-		Bind(&req).
-		MakeService(&s.Service).
-		Errors
-	if err != nil {
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
 		e.Logger.Error(err)
 		return
 	}
 	req.SetUpdateBy(user.GetUserId(c))
 	p := actions.GetPermissionFromContext(c)
-	err = s.Update(&req, p)
-	if err != nil {
+	if err := s.Update(&req, p); err != nil {
 		e.Error(500, err, "更新失败")
 		return
 	}

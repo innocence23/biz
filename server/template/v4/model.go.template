@@ -4,6 +4,8 @@ import (
    // "gorm.io/gorm"
 
 	"maktub/common/models"
+    "time"
+
 )
 
 type {{.ClassName}} struct {

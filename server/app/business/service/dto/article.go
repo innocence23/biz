@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"maktub/app/admin/models"
+	"maktub/app/business/models"
 	"maktub/common/dto"
 	common "maktub/common/models"
      

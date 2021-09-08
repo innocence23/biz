@@ -6,8 +6,8 @@ import (
     "github.com/go-admin-team/go-admin-core/sdk/service"
 	"gorm.io/gorm"
 
-	"maktub/app/admin/models"
-	"maktub/app/admin/service/dto"
+	"maktub/app/business/models"
+	"maktub/app/business/service/dto"
 	"maktub/common/actions"
 	cDto "maktub/common/dto"
 )

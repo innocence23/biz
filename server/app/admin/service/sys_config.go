@@ -15,22 +15,6 @@ type SysConfig struct {
 	service.Service
 }
 
-// GetPage 获取SysConfig列表
-func (e *SysConfig) GetPage(c *dto.SysConfigGetPageReq, list *[]models.SysConfig, count *int64) error {
-	err := e.Orm.
-		Scopes(
-			cDto.MakeCondition(c.GetNeedSearch()),
-			cDto.Paginate(c.GetPageSize(), c.GetPageIndex()),
-		).
-		Find(list).Limit(-1).Offset(-1).
-		Count(count).Error
-	if err != nil {
-		e.Log.Errorf("Service GetSysConfigPage error:%s", err)
-		return err
-	}
-	return nil
-}
-
 // Get 获取SysConfig对象
 func (e *SysConfig) Get(d *dto.SysConfigGetReq, model *models.SysConfig) error {
 	err := e.Orm.First(model, d.GetId()).Error
@@ -42,38 +26,6 @@ func (e *SysConfig) Get(d *dto.SysConfigGetReq, model *models.SysConfig) error {
 	if err != nil {
 		e.Log.Errorf("Service GetSysConfig error:%s", err)
 		return err
-	}
-	return nil
-}
-
-// Insert 创建SysConfig对象
-func (e *SysConfig) Insert(c *dto.SysConfigControl) error {
-	var err error
-	var data models.SysConfig
-	c.Generate(&data)
-	err = e.Orm.Create(&data).Error
-	if err != nil {
-		e.Log.Errorf("Service InsertSysConfig error:%s", err)
-		return err
-	}
-	return nil
-}
-
-// Update 修改SysConfig对象
-func (e *SysConfig) Update(c *dto.SysConfigControl) error {
-	var err error
-	var model = models.SysConfig{}
-	e.Orm.First(&model, c.GetId())
-	c.Generate(&model)
-	db := e.Orm.Save(&model)
-	err = db.Error
-	if err != nil {
-		e.Log.Errorf("Service UpdateSysConfig error:%s", err)
-		return err
-	}
-	if db.RowsAffected == 0 {
-		return errors.New("无权更新该数据")
-
 	}
 	return nil
 }

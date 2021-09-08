@@ -8,9 +8,9 @@ import (
 	"github.com/go-admin-team/go-admin-core/sdk/pkg/jwtauth/user"
 	_ "github.com/go-admin-team/go-admin-core/sdk/pkg/response"
 
-	"maktub/app/admin/models"
-	"maktub/app/admin/service"
-	"maktub/app/admin/service/dto"
+	"maktub/app/business/models"
+	"maktub/app/business/service"
+	"maktub/app/business/service/dto"
 	"maktub/common/actions"
 )
 

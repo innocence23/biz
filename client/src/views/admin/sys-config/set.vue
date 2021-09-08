@@ -16,19 +16,6 @@
                       <i class="el-icon-plus" />
                     </el-upload>
                   </el-form-item>
-                  <el-form-item label="初始密码" prop="sys_user_initPassword">
-                    <el-input v-model="form.sys_user_initPassword" placeholder="请输入初始密码" clearable :style="{width: '100%'}" />
-                  </el-form-item>
-                  <el-form-item label="皮肤样式" prop="sys_index_skinName">
-                    <el-select v-model="form.sys_index_skinName" placeholder="请选择皮肤样式" clearable :style="{width: '100%'}">
-                      <el-option v-for="(item, index) in sys_index_skinNameOptions" :key="index" :label="item.label" :value="item.value" :disabled="item.disabled" />
-                    </el-select>
-                  </el-form-item>
-                  <el-form-item label="侧栏主题" prop="sys_index_sideTheme">
-                    <el-select v-model="form.sys_index_sideTheme" placeholder="请选择侧栏主题" clearable :style="{width: '100%'}">
-                      <el-option v-for="(item, index) in sys_index_sideThemeOptions" :key="index" :label="item.label" :value="item.value" :disabled="item.disabled" />
-                    </el-select>
-                  </el-form-item>
                   <el-form-item size="large">
                     <el-button type="primary" @click="submitForm">提交</el-button>
                     <el-button @click="resetForm">重置</el-button>
@@ -37,9 +24,7 @@
               </div>
             </el-form>
           </el-tab-pane>
-          <el-tab-pane label="其他">其他</el-tab-pane>
         </el-tabs>
-
       </el-card>
     </template>
   </BasicLayout>
@@ -77,33 +62,10 @@ export default {
           required: true,
           message: '请输入系统名称',
           trigger: 'blur'
-        }],
-        sys_user_initPassword: [{
-          required: true,
-          message: '请输入初始密码',
-          trigger: 'blur'
-        }],
-        sys_index_skinName: [{
-          required: true,
-          message: '请选择皮肤样式',
-          trigger: 'change'
-        }],
-        sys_index_sideTheme: [{
-          required: true,
-          message: '请选择侧栏主题',
-          trigger: 'change'
         }]
       },
       sys_app_logoAction: 'http://localhost:8000/api/v1/public/uploadFile',
-      sys_app_logofileList: [],
-      sys_index_skinNameOptions: [{
-        'label': '蓝色',
-        'value': 'skin-blue'
-      }],
-      sys_index_sideThemeOptions: [{
-        'label': '深色主题',
-        'value': 'theme-dark'
-      }]
+      sys_app_logofileList: []
     }
   },
   created() {

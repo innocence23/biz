@@ -6,10 +6,8 @@ import (
 	"maktub/app/admin/service"
 	"maktub/app/admin/service/dto"
 	"os"
-	"strconv"
 	"strings"
 	"text/template"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-admin-team/go-admin-core/sdk/api"
@@ -137,31 +135,6 @@ func (e Gen) GenCode(c *gin.Context) {
 	e.OK("", "Code generated successfully！")
 }
 
-func (e Gen) GenApiToFile(c *gin.Context) {
-	e.Context = c
-	log := e.GetLogger()
-	table := tools.SysTables{}
-	id, err := pkg.StringToInt(c.Param("tableId"))
-	if err != nil {
-		log.Error(err)
-		e.Error(500, err, fmt.Sprintf("tableId参数获取失败！错误详情：%s", err.Error()))
-		return
-	}
-
-	db, err := pkg.GetOrm(c)
-	if err != nil {
-		log.Errorf("get db connection error, %s", err.Error())
-		e.Error(500, err, fmt.Sprintf("数据库链接获取失败！错误详情：%s", err.Error()))
-		return
-	}
-
-	table.TableId = id
-	tab, _ := table.Get(db, false)
-	e.genApiToFile(c, tab)
-
-	e.OK("", "Code generated successfully！")
-}
-
 func (e Gen) NOActionsGen(c *gin.Context, tab tools.SysTables) {
 	e.Context = c
 	log := e.GetLogger()
@@ -255,35 +228,6 @@ func (e Gen) NOActionsGen(c *gin.Context, tab tools.SysTables) {
 	pkg.FileCreate(b5, config.GenConfig.FrontPath+"/views/"+tab.PackageName+"/"+tab.MLTBName+"/index.vue")
 	pkg.FileCreate(b6, "./app/"+tab.PackageName+"/service/dto/"+tab.TBName+".go")
 	pkg.FileCreate(b7, "./app/"+tab.PackageName+"/service/"+tab.TBName+".go")
-
-}
-
-func (e Gen) genApiToFile(c *gin.Context, tab tools.SysTables) {
-	err := e.MakeContext(c).
-		MakeOrm().
-		Errors
-	if err != nil {
-		e.Logger.Error(err)
-		e.Error(500, err, err.Error())
-		return
-	}
-
-	basePath := "template/"
-
-	t1, err := template.ParseFiles(basePath + "api_migrate.template")
-	if err != nil {
-		e.Logger.Error(err)
-		e.Error(500, err, fmt.Sprintf("数据迁移模版解析失败！错误详情：%s", err.Error()))
-		return
-	}
-	i := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
-	var b1 bytes.Buffer
-	err = t1.Execute(&b1, struct {
-		tools.SysTables
-		GenerateTime string
-	}{tab, i})
-
-	pkg.FileCreate(b1, "./cmd/migrate/migration/version-local/"+i+"_migrate.go")
 
 }
 

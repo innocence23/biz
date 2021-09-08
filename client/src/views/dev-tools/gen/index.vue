@@ -139,20 +139,6 @@
 
               <el-popconfirm
                 class="delete-popconfirm"
-                title="正在使用代码生成配置迁移脚本请确认?"
-                confirm-button-text="生成"
-                @onConfirm="handleToApiFile(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  type="text"
-                  size="small"
-                  icon="el-icon-view"
-                >生成迁移脚本</el-button>
-              </el-popconfirm>
-
-              <el-popconfirm
-                class="delete-popconfirm"
                 title="确认删除数据项？"
                 @onConfirm="handleSingleDelete(scope.row)"
               >
@@ -211,7 +197,7 @@
 </template>
 
 <script>
-import { listTable, previewTable, delTable, toDBTable, toProjectTableCheckRole, apiToFile } from '@/api/tools/gen'
+import { listTable, previewTable, delTable, toDBTable, toProjectTableCheckRole } from '@/api/tools/gen'
 import importTable from './importTable'
 import { downLoadFile } from '@/utils/zipdownload'
 import { codemirror } from 'vue-codemirror'
@@ -337,11 +323,6 @@ export default {
     },
     handleToProject(row) {
       toProjectTableCheckRole(row.tableId, false).then((response) => {
-        this.msgSuccess(response.msg)
-      }).catch(function() {})
-    },
-    handleToApiFile(row) {
-      apiToFile(row.tableId, true).then((response) => {
         this.msgSuccess(response.msg)
       }).catch(function() {})
     },

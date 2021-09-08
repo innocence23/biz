@@ -12,7 +12,7 @@ func init() {
 	routerCheckRole = append(routerCheckRole, sysNoCheckRoleRouter, registerDBRouter, registerSysTableRouter)
 }
 
-func sysNoCheckRoleRouter(v1 *gin.RouterGroup ,authMiddleware *jwt.GinJWTMiddleware) {
+func sysNoCheckRoleRouter(v1 *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware) {
 	r1 := v1.Group("")
 	{
 		sys := apis.System{}
@@ -24,7 +24,6 @@ func sysNoCheckRoleRouter(v1 *gin.RouterGroup ,authMiddleware *jwt.GinJWTMiddlew
 		gen := tools.Gen{}
 		r.GET("/gen/preview/:tableId", gen.Preview)
 		r.GET("/gen/toproject/:tableId", gen.GenCode)
-		r.GET("/gen/apitofile/:tableId", gen.GenApiToFile)
 		r.GET("/gen/todb/:tableId", gen.GenMenuAndApi)
 		sysTable := tools.SysTable{}
 		r.GET("/gen/tabletree", sysTable.GetSysTablesTree)

@@ -23,7 +23,7 @@
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
                         <el-button
-                                v-permisaction="['admin:article:add']"
+                                v-permisaction="['business:article:add']"
                                 type="primary"
                                 icon="el-icon-plus"
                                 size="mini"
@@ -33,7 +33,7 @@
                     </el-col>
                     <el-col :span="1.5">
                         <el-button
-                                v-permisaction="['admin:article:edit']"
+                                v-permisaction="['business:article:edit']"
                                 type="success"
                                 icon="el-icon-edit"
                                 size="mini"
@@ -44,7 +44,7 @@
                     </el-col>
                     <el-col :span="1.5">
                         <el-button
-                                v-permisaction="['admin:article:remove']"
+                                v-permisaction="['business:article:remove']"
                                 type="danger"
                                 icon="el-icon-delete"
                                 size="mini"
@@ -75,7 +75,7 @@
                          >
                            <el-button
                              slot="reference"
-                             v-permisaction="['admin:article:edit']"
+                             v-permisaction="['business:article:edit']"
                              size="mini"
                              type="text"
                              icon="el-icon-edit"
@@ -90,7 +90,7 @@
                          >
                             <el-button
                               slot="reference"
-                              v-permisaction="['admin:article:remove']"
+                              v-permisaction="['business:article:remove']"
                               size="mini"
                               type="text"
                               icon="el-icon-delete"
@@ -148,7 +148,7 @@
 </template>
 
 <script>
-    import {addArticle, delArticle, getArticle, listArticle, updateArticle} from '@/api/admin/article'
+    import {addArticle, delArticle, getArticle, listArticle, updateArticle} from '@/api/business/article'
     
     export default {
         name: 'Article',

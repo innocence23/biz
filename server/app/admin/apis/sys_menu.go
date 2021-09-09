@@ -27,19 +27,13 @@ type SysMenu struct {
 func (e SysMenu) GetPage(c *gin.Context) {
 	s := service.SysMenu{}
 	req := dto.SysMenuGetPageReq{}
-	err := e.MakeContext(c).
-		MakeOrm().
-		Bind(&req, binding.Form).
-		MakeService(&s.Service).
-		Errors
-	if err != nil {
+	if err := e.MakeContext(c).MakeOrm().Bind(&req, binding.Form).MakeService(&s.Service).Errors; err != nil {
 		e.Logger.Error(err)
 		e.Error(500, err, err.Error())
 		return
 	}
 	var list = make([]models.SysMenu, 0)
-	err = s.GetPage(&req, &list).Error
-	if err != nil {
+	if err := s.GetPage(&req, &list).Error; err != nil {
 		e.Error(500, err, "查询失败")
 		return
 	}
@@ -254,7 +248,7 @@ func (e SysMenu) GetMenuRole(c *gin.Context) {
 func (e SysMenu) GetMenuTreeSelect(c *gin.Context) {
 	m := service.SysMenu{}
 	r := service.SysRole{}
-	req :=dto.SelectRole{}
+	req := dto.SelectRole{}
 	err := e.MakeContext(c).
 		MakeOrm().
 		MakeService(&m.Service).

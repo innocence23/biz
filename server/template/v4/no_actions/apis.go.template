@@ -37,12 +37,7 @@ type {{.ClassName}} struct {
 func (e {{.ClassName}}) GetPage(c *gin.Context) {
     req := dto.{{.ClassName}}GetPageReq{}
     s := service.{{.ClassName}}{}
-    err := e.MakeContext(c).
-        MakeOrm().
-        Bind(&req).
-        MakeService(&s.Service).
-        Errors
-   	if err != nil {
+    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
    		e.Logger.Error(err)
    		e.Error(500, err, err.Error())
    		return
@@ -51,9 +46,7 @@ func (e {{.ClassName}}) GetPage(c *gin.Context) {
 	p := actions.GetPermissionFromContext(c)
 	list := make([]models.{{.ClassName}}, 0)
 	var count int64
-
-	err = s.GetPage(&req, p, &list, &count)
-	if err != nil {
+	if err := s.GetPage(&req, p, &list, &count); err != nil {
 		e.Error(500, err, fmt.Sprintf("获取{{.TableComment}} 失败，\r\n失败信息 %s", err.Error()))
         return
 	}
@@ -72,12 +65,7 @@ func (e {{.ClassName}}) GetPage(c *gin.Context) {
 func (e {{.ClassName}}) Get(c *gin.Context) {
 	req := dto.{{.ClassName}}GetReq{}
 	s := service.{{.ClassName}}{}
-    err := e.MakeContext(c).
-		MakeOrm().
-		Bind(&req).
-		MakeService(&s.Service).
-		Errors
-	if err != nil {
+    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
 		e.Logger.Error(err)
 		e.Error(500, err, err.Error())
 		return
@@ -85,8 +73,7 @@ func (e {{.ClassName}}) Get(c *gin.Context) {
 	var object models.{{.ClassName}}
 
 	p := actions.GetPermissionFromContext(c)
-	err = s.Get(&req, p, &object)
-	if err != nil {
+	if err := s.Get(&req, p, &object); err != nil {
 		e.Error(500, err, fmt.Sprintf("获取{{.TableComment}}失败，\r\n失败信息 %s", err.Error()))
         return
 	}
@@ -107,12 +94,7 @@ func (e {{.ClassName}}) Get(c *gin.Context) {
 func (e {{.ClassName}}) Insert(c *gin.Context) {
     req := dto.{{.ClassName}}InsertReq{}
     s := service.{{.ClassName}}{}
-    err := e.MakeContext(c).
-        MakeOrm().
-        Bind(&req).
-        MakeService(&s.Service).
-        Errors
-    if err != nil {
+    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
         e.Logger.Error(err)
         e.Error(500, err, err.Error())
         return
@@ -120,8 +102,7 @@ func (e {{.ClassName}}) Insert(c *gin.Context) {
 	// 设置创建人
 	req.SetCreateBy(user.GetUserId(c))
 
-	err = s.Insert(&req)
-	if err != nil {
+	if err := s.Insert(&req); err != nil {
 		e.Error(500, err, fmt.Sprintf("创建{{.TableComment}}  失败，\r\n失败信息 %s", err.Error()))
         return
 	}
@@ -142,12 +123,7 @@ func (e {{.ClassName}}) Insert(c *gin.Context) {
 func (e {{.ClassName}}) Update(c *gin.Context) {
     req := dto.{{.ClassName}}UpdateReq{}
     s := service.{{.ClassName}}{}
-    err := e.MakeContext(c).
-        MakeOrm().
-        Bind(&req).
-        MakeService(&s.Service).
-        Errors
-    if err != nil {
+    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
         e.Logger.Error(err)
         e.Error(500, err, err.Error())
         return
@@ -155,8 +131,7 @@ func (e {{.ClassName}}) Update(c *gin.Context) {
 	req.SetUpdateBy(user.GetUserId(c))
 	p := actions.GetPermissionFromContext(c)
 
-	err = s.Update(&req, p)
-	if err != nil {
+	if err := s.Update(&req, p); err != nil {
 		e.Error(500, err, fmt.Sprintf("修改{{.TableComment}} 失败，\r\n失败信息 %s", err.Error()))
         return
 	}
@@ -174,12 +149,7 @@ func (e {{.ClassName}}) Update(c *gin.Context) {
 func (e {{.ClassName}}) Delete(c *gin.Context) {
     s := service.{{.ClassName}}{}
     req := dto.{{.ClassName}}DeleteReq{}
-    err := e.MakeContext(c).
-        MakeOrm().
-        Bind(&req).
-        MakeService(&s.Service).
-        Errors
-    if err != nil {
+    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
         e.Logger.Error(err)
         e.Error(500, err, err.Error())
         return
@@ -188,8 +158,7 @@ func (e {{.ClassName}}) Delete(c *gin.Context) {
 	// req.SetUpdateBy(user.GetUserId(c))
 	p := actions.GetPermissionFromContext(c)
 
-	err = s.Remove(&req, p)
-	if err != nil {
+	if err := s.Remove(&req, p); err != nil {
 		e.Error(500, err, fmt.Sprintf("删除{{.TableComment}}失败，\r\n失败信息 %s", err.Error()))
         return
 	}

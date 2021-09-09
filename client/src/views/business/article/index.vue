@@ -67,21 +67,15 @@
                                 </el-table-column>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
-                         <el-popconfirm
-                           class="delete-popconfirm"
-                           title="确认要修改吗?"
-                           confirm-button-text="修改"
-                           @onConfirm="handleUpdate(scope.row)"
-                         >
-                           <el-button
-                             slot="reference"
-                             v-permisaction="['business:article:edit']"
-                             size="mini"
-                             type="text"
-                             icon="el-icon-edit"
-                           >修改
-                           </el-button>
-                         </el-popconfirm>
+                        <el-button
+                            slot="reference"
+                            v-permisaction="['business:article:edit']"
+                            @click="handleUpdate(scope.row)"
+                            size="mini"
+                            type="text"
+                            icon="el-icon-edit"
+                        >修改
+                        </el-button>
                          <el-popconfirm
                             class="delete-popconfirm"
                             title="确认要删除吗?"

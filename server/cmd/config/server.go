@@ -5,9 +5,8 @@ import (
 	"fmt"
 
 	"github.com/go-admin-team/go-admin-core/config/source/file"
-	"github.com/spf13/cobra"
-
 	"github.com/go-admin-team/go-admin-core/sdk/config"
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -41,7 +40,6 @@ func run() {
 	}
 	fmt.Println("jwt:", string(jwt))
 
-	// todo 需要兼容
 	database, errs := json.MarshalIndent(config.DatabasesConfig, "", "   ") //转换成JSON返回的是byte[]
 	if errs != nil {
 		fmt.Println(errs.Error())
@@ -59,5 +57,4 @@ func run() {
 		fmt.Println(errs.Error())
 	}
 	fmt.Println("logger:", string(loggerConfig))
-
 }

@@ -4,6 +4,15 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"maktub/app/admin/models"
+	"maktub/app/admin/router"
+	"maktub/app/jobs"
+	"maktub/common/database"
+	"maktub/common/global"
+	common "maktub/common/middleware"
+	"maktub/common/middleware/handler"
+	"maktub/common/storage"
+	ext "maktub/config"
 	"net/http"
 	"os"
 	"os/signal"
@@ -17,16 +26,6 @@ import (
 	"github.com/go-admin-team/go-admin-core/sdk/pkg"
 	"github.com/go-admin-team/go-admin-core/sdk/runtime"
 	"github.com/spf13/cobra"
-
-	"maktub/app/admin/models"
-	"maktub/app/admin/router"
-	"maktub/app/jobs"
-	"maktub/common/database"
-	"maktub/common/global"
-	common "maktub/common/middleware"
-	"maktub/common/middleware/handler"
-	"maktub/common/storage"
-	ext "maktub/config"
 )
 
 var (

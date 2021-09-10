@@ -29,10 +29,7 @@ func init() {
 }
 
 func run() {
-
 	fmt.Println(`start init`)
-	//1. 读取配置
-
 	fmt.Println(`generate migration file`)
 	_ = genFile()
 

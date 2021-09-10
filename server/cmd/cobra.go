@@ -3,24 +3,22 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"maktub/cmd/api"
 	"maktub/cmd/app"
+	"maktub/cmd/config"
+	"maktub/cmd/version"
 	"maktub/common/global"
 	"os"
 
 	"github.com/go-admin-team/go-admin-core/sdk/pkg"
-
 	"github.com/spf13/cobra"
-
-	"maktub/cmd/api"
-	"maktub/cmd/config"
-	"maktub/cmd/version"
 )
 
 var rootCmd = &cobra.Command{
-	Use:          "go-admin",
-	Short:        "go-admin",
+	Use:          "admin",
+	Short:        "admin",
 	SilenceUsage: true,
-	Long:         `go-admin`,
+	Long:         `admin`,
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) < 1 {
 			tip()
@@ -28,7 +26,9 @@ var rootCmd = &cobra.Command{
 		}
 		return nil
 	},
-	PersistentPreRunE: func(*cobra.Command, []string) error { return nil },
+	PersistentPreRunE: func(*cobra.Command, []string) error {
+		return nil
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		tip()
 	},
@@ -36,10 +36,7 @@ var rootCmd = &cobra.Command{
 
 func tip() {
 	usageStr := `欢迎使用 ` + pkg.Green(`maktub `+global.Version) + ` 可以使用 ` + pkg.Red(`-h`) + ` 查看命令`
-
-	usageStr1 := `也可以参考 https://doc.go-admin.dev/guide/ksks.html 里边的【启动】章节`
 	fmt.Printf("%s\n", usageStr)
-	fmt.Printf("%s\n", usageStr1)
 }
 
 func init() {

@@ -140,19 +140,17 @@
           :limit.sync="queryParams.pageSize"
           @pagination="getList"
         />
-
         <!-- 添加或修改对话框 -->
         <el-drawer
           ref="drawer"
           :title="title"
-          :before-close="handleClose"
+          :before-close="cancel"
           :visible.sync="open"
           direction="rtl"
           custom-class="demo-drawer"
         >
           <div class="demo-drawer__content">
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-
               <el-form-item label="Handle" prop="handle">
                 <el-input
                   v-model="form.handle"

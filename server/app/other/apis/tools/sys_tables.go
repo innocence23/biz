@@ -28,7 +28,7 @@ type SysTable struct {
 func (e SysTable) GetPage(c *gin.Context) {
 	e.Context = c
 	log := e.GetLogger()
-	var data tools.SysTables
+	var data tools.SysTable
 	var err error
 	var pageSize = 10
 	var pageIndex = 1
@@ -77,7 +77,7 @@ func (e SysTable) Get(c *gin.Context) {
 		return
 	}
 
-	var data tools.SysTables
+	var data tools.SysTable
 	data.TableId, _ = pkg.StringToInt(c.Param("tableId"))
 	result, err := data.Get(db, true)
 	if err != nil {
@@ -92,7 +92,7 @@ func (e SysTable) Get(c *gin.Context) {
 	e.OK(mp, "")
 }
 
-func (e SysTable) GetSysTablesInfo(c *gin.Context) {
+func (e SysTable) GetSysTableInfo(c *gin.Context) {
 	e.Context = c
 	log := e.GetLogger()
 	db, err := e.GetOrm()
@@ -102,7 +102,7 @@ func (e SysTable) GetSysTablesInfo(c *gin.Context) {
 		return
 	}
 
-	var data tools.SysTables
+	var data tools.SysTable
 	if c.Request.FormValue("tableName") != "" {
 		data.TBName = c.Request.FormValue("tableName")
 	}
@@ -121,7 +121,7 @@ func (e SysTable) GetSysTablesInfo(c *gin.Context) {
 	//c.JSON(http.StatusOK, res.ReturnOK())
 }
 
-func (e SysTable) GetSysTablesTree(c *gin.Context) {
+func (e SysTable) GetSysTableTree(c *gin.Context) {
 	e.Context = c
 	log := e.GetLogger()
 	db, err := e.GetOrm()
@@ -131,7 +131,7 @@ func (e SysTable) GetSysTablesTree(c *gin.Context) {
 		return
 	}
 
-	var data tools.SysTables
+	var data tools.SysTable
 	result, err := data.GetTree(db)
 	if err != nil {
 		log.Errorf("GetTree error, %s", err.Error())
@@ -184,8 +184,8 @@ func (e SysTable) Insert(c *gin.Context) {
 
 }
 
-func genTableInit(tx *gorm.DB, tablesList []string, i int, c *gin.Context) (tools.SysTables, error) {
-	var data tools.SysTables
+func genTableInit(tx *gorm.DB, tablesList []string, i int, c *gin.Context) (tools.SysTable, error) {
+	var data tools.SysTable
 	var dbTable tools.DBTables
 	var dbColumn tools.DBColumns
 	data.TBName = tablesList[i]
@@ -237,7 +237,7 @@ func genTableInit(tx *gorm.DB, tablesList []string, i int, c *gin.Context) (tool
 
 	data.FunctionAuthor = "wenjianzhang"
 	for i := 0; i < len(dbcolumn); i++ {
-		var column tools.SysColumns
+		var column tools.SysTableColumn
 		column.ColumnComment = dbcolumn[i].ColumnComment
 		column.ColumnName = dbcolumn[i].ColumnName
 		column.ColumnType = dbcolumn[i].ColumnType
@@ -302,13 +302,13 @@ func genTableInit(tx *gorm.DB, tablesList []string, i int, c *gin.Context) (tool
 // @Tags 工具 / 生成工具
 // @Accept  application/json
 // @Product application/json
-// @Param data body tools.SysTables true "body"
+// @Param data body tools.SysTable true "body"
 // @Success 200 {string} string	"{"code": 200, "message": "添加成功"}"
 // @Success 200 {string} string	"{"code": -1, "message": "添加失败"}"
 // @Router /api/v1/sys/tables/info [put]
 // @Security Bearer
 func (e SysTable) Update(c *gin.Context) {
-	var data tools.SysTables
+	var data tools.SysTable
 	err := c.Bind(&data)
 	pkg.HasError(err, "数据解析失败", 500)
 
@@ -349,7 +349,7 @@ func (e SysTable) Delete(c *gin.Context) {
 		return
 	}
 
-	var data tools.SysTables
+	var data tools.SysTable
 	IDS := pkg.IdsStrToIdsIntGroup("tableId", c)
 	_, err = data.BatchDelete(db, IDS)
 	if err != nil {

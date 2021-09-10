@@ -24,7 +24,7 @@ type Gen struct {
 func (e Gen) Preview(c *gin.Context) {
 	e.Context = c
 	log := e.GetLogger()
-	table := tools.SysTables{}
+	table := tools.SysTable{}
 	id, err := pkg.StringToInt(c.Param("tableId"))
 	if err != nil {
 		log.Error(err)
@@ -112,7 +112,7 @@ func (e Gen) Preview(c *gin.Context) {
 func (e Gen) GenCode(c *gin.Context) {
 	e.Context = c
 	log := e.GetLogger()
-	table := tools.SysTables{}
+	table := tools.SysTable{}
 	id, err := pkg.StringToInt(c.Param("tableId"))
 	if err != nil {
 		log.Error(err)
@@ -135,7 +135,7 @@ func (e Gen) GenCode(c *gin.Context) {
 	e.OK("", "Code generated successfully！")
 }
 
-func (e Gen) NOActionsGen(c *gin.Context, tab tools.SysTables) {
+func (e Gen) NOActionsGen(c *gin.Context, tab tools.SysTable) {
 	e.Context = c
 	log := e.GetLogger()
 	tab.MLTBName = strings.Replace(tab.TBName, "_", "-", -1)
@@ -243,7 +243,7 @@ func (e Gen) GenMenuAndApi(c *gin.Context) {
 		return
 	}
 
-	table := tools.SysTables{}
+	table := tools.SysTable{}
 	id, err := pkg.StringToInt(c.Param("tableId"))
 	if err != nil {
 		e.Logger.Error(err)

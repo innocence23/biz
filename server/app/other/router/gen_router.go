@@ -26,7 +26,7 @@ func sysNoCheckRoleRouter(v1 *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddlew
 		r.GET("/gen/toproject/:tableId", gen.GenCode)
 		r.GET("/gen/todb/:tableId", gen.GenMenuAndApi)
 		sysTable := tools.SysTable{}
-		r.GET("/gen/tabletree", sysTable.GetSysTablesTree)
+		r.GET("/gen/tabletree", sysTable.GetSysTableTree)
 	}
 }
 
@@ -50,7 +50,7 @@ func registerSysTableRouter(v1 *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddl
 			tablesInfo.PUT("", sysTable.Update)
 			tablesInfo.DELETE("/:tableId", sysTable.Delete)
 			tablesInfo.GET("/:tableId", sysTable.Get)
-			tablesInfo.GET("", sysTable.GetSysTablesInfo)
+			tablesInfo.GET("", sysTable.GetSysTableInfo)
 		}
 	}
 }

@@ -17,7 +17,6 @@ export function get{{.ClassName}} ({{.PkJsonField}}) {
     })
 }
 
-
 // 新增{{.ClassName}}
 export function add{{.ClassName}}(data) {
     return request({

@@ -64,7 +64,7 @@ export default {
           trigger: 'blur'
         }]
       },
-      sys_app_logoAction: 'http://localhost:8000/api/v1/public/uploadFile',
+      sys_app_logoAction: process.env.VUE_APP_BASE_API + '/api/v1/public/uploadFile',
       sys_app_logofileList: []
     }
   },

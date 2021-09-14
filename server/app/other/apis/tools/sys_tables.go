@@ -214,7 +214,7 @@ func genTableInit(tx *gorm.DB, tablesList []string, i int, c *gin.Context) (tool
 		//data.ModuleName += strings.ToLower(strStart) + strings.ToLower(strend)
 	}
 	//data.ModuleFrontName = strings.ReplaceAll(data.ModuleName, "_", "-")
-	data.PackageName = "admin"
+	data.PackageName = "business"
 	data.TplCategory = "crud"
 	data.Crud = true
 	// 中横线表名称，接口路径、前端文件夹名称和js名称使用

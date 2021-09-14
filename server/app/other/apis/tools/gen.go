@@ -3,6 +3,7 @@ package tools
 import (
 	"bytes"
 	"fmt"
+	"maktub/app/admin/models"
 	"maktub/app/admin/service"
 	"maktub/app/admin/service/dto"
 	"os"
@@ -255,31 +256,31 @@ func (e Gen) GenMenuAndApi(c *gin.Context) {
 	tab, _ := table.Get(e.Orm, true)
 	tab.MLTBName = strings.Replace(tab.TBName, "_", "-", -1)
 
-	Mmenu := dto.SysMenuInsertReq{}
-	Mmenu.Title = tab.TableComment
-	Mmenu.Icon = "pass"
-	Mmenu.Path = "/" + tab.MLTBName
-	Mmenu.MenuType = "M"
-	Mmenu.Action = "无"
-	Mmenu.ParentId = 0
-	Mmenu.NoCache = false
-	Mmenu.Component = "Layout"
-	Mmenu.Sort = 0
-	Mmenu.Visible = "0"
-	Mmenu.IsFrame = "0"
-	Mmenu.CreateBy = 1
-	s.Insert(&Mmenu)
+	// Mmenu := dto.SysMenuInsertReq{}
+	// Mmenu.Title = tab.TableComment
+	// Mmenu.Icon = "pass"
+	// Mmenu.Path = "/" + tab.MLTBName
+	// Mmenu.MenuType = "M"
+	// Mmenu.Action = "无"
+	// Mmenu.ParentId = 0
+	// Mmenu.NoCache = false
+	// Mmenu.Component = "Layout"
+	// Mmenu.Sort = 0
+	// Mmenu.Visible = "0"
+	// Mmenu.IsFrame = "0"
+	// Mmenu.CreateBy = 1
+	// s.Insert(&Mmenu)
 
-	// todo 默认创建到business下  543 需要变通
-	//var Mmenu = models.SysMenu{}
-	// req := dto.SysMenuGetReq{
-	// 	Id: 543,
-	// }
-	// err = s.Get(&req, &Mmenu).Error
-	// if err != nil {
-	// 	e.Error(500, err, "查询失败")
-	// 	return
-	// }
+	// todo 默认创建到business下  69 需要变通
+	var Mmenu = models.SysMenu{}
+	req := dto.SysMenuGetReq{
+		Id: 69,
+	}
+	err = s.Get(&req, &Mmenu).Error
+	if err != nil {
+		e.Error(500, err, "查询失败")
+		return
+	}
 
 	Cmenu := dto.SysMenuInsertReq{}
 	Cmenu.MenuName = tab.ClassName + "Manage"

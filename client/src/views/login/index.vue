@@ -321,7 +321,7 @@ $cursor: #fff;
   height: 100%;
   margin: 0 auto;
   background: url("../../assets/login.png") no-repeat;
-  background-color: #0e6cff;
+  background-color: #575c67f5;
   position: relative;
   background-size: cover;
   height: 100vh;
@@ -336,6 +336,7 @@ $cursor: #fff;
 }
 
 .login-weaper {
+  background-color: #82848ac2;
   margin: 0 auto;
   width: 1000px;
   -webkit-box-shadow: -4px 5px 10px rgba(0, 0, 0, 0.4);
@@ -519,6 +520,7 @@ $light_gray: #eee;
       display: none;
     }
     .login-weaper {
+      background-color: #82848ac2;
       width: 100%;
       padding: 0 30px;
       box-sizing: border-box;

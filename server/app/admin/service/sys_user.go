@@ -128,7 +128,7 @@ func (e *SysUser) UpdateAvatar(c *dto.UpdateSysUserAvatarReq, p *actions.DataPer
 
 	}
 	c.Generate(&model)
-	err = e.Orm.Save(&model).Error
+	err = e.Orm.Omit("password", "salt").Save(&model).Error
 	if err != nil {
 		e.Log.Errorf("Service UpdateSysUser error: %s", err)
 		return err
@@ -152,7 +152,7 @@ func (e *SysUser) UpdateStatus(c *dto.UpdateSysUserStatusReq, p *actions.DataPer
 
 	}
 	c.Generate(&model)
-	err = e.Orm.Save(&model).Error
+	err = e.Orm.Omit("password", "salt").Save(&model).Error
 	if err != nil {
 		e.Log.Errorf("Service UpdateSysUser error: %s", err)
 		return err

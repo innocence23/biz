@@ -6,10 +6,11 @@
 server/static/uploadfile
 server/temp/
 server/!temp
-server/go-admin
+server/admin
 server/common/middleware/demo.go
 server/config/settings.dev.yml
 server/go.sum
+server/run
 
 client/node_modules/
 client/dist/

@@ -37,9 +37,6 @@ func sysBaseRouter(r *gin.RouterGroup) {
 	go ws.WebsocketManager.SendService()
 	go ws.WebsocketManager.SendAllService()
 
-	if config.ApplicationConfig.Mode != "prod" {
-		r.GET("/", apis.GoAdmin)
-	}
 	r.GET("/info", handler.Ping)
 }
 

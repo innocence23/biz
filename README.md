@@ -19,15 +19,14 @@
 
 
 
-- todo 进入容器生成 golang命令
-- todo 进入容器生成 dist前端页面
+- todo 进入容器生成 golang命令   [ docker-compose exec server /bin/sh  ->  go build -o ./run . ]
+- todo 进入容器生成 dist前端页面  [ docker-compose exec client /bin/bash  ->   npm run build:prod ]
 
-- 日志
+
+- image文件部署共享问题
+
+
 - 添加一个用户验证权限
 - 隐藏管理菜单
-- image文件部署共享问题
-- 登陆页面图文背景
 
---  修改账号的登陆bug 严重 严重 （已解决）
-
--- 权限sql go-admin路径
+首页问题

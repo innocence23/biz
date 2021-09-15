@@ -94,7 +94,7 @@ func LoggerToFile() gin.HandlerFunc {
 		}
 		log.WithFields(logData).Info()
 
-		if c.Request.Method != "OPTIONS" && config.LoggerConfig.EnabledDB && statusCode != 404 {
+		if (c.Request.Method != "OPTIONS" && c.Request.Method != "GET") && config.LoggerConfig.EnabledDB && statusCode != 404 {
 			SetDBOperLog(c, clientIP, statusCode, reqUri, reqMethod, latencyTime, body, result, statusBus)
 		}
 	}

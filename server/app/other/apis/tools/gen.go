@@ -198,10 +198,7 @@ func (e Gen) NOActionsGen(c *gin.Context, tab tools.SysTable) {
 	_ = pkg.PathCreate(config.GenConfig.FrontPath + "/api/" + tab.PackageName + "/")
 	err = pkg.PathCreate(config.GenConfig.FrontPath + "/views/" + tab.PackageName + "/" + tab.MLTBName + "/")
 
-	info, err := os.Stat(config.GenConfig.FrontPath + "/views/" + tab.PackageName + "/" + tab.MLTBName + "/")
-
-	fmt.Println("========", info, err)
-	fmt.Println("========", config.GenConfig.FrontPath+"/views/"+tab.PackageName+"/"+tab.MLTBName+"/")
+	_, err = os.Stat(config.GenConfig.FrontPath + "/views/" + tab.PackageName + "/" + tab.MLTBName + "/")
 	if err != nil {
 		log.Error(err)
 		e.Error(500, err, fmt.Sprintf("views目录创建失败！错误详情：%s", err.Error()))

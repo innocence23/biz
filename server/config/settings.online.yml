@@ -1,7 +1,7 @@
 settings:
   application:
     # dev开发环境 test测试环境 prod线上环境
-    mode: dev
+    mode: prod
     # 服务器ip，默认使用 0.0.0.0
     host: 0.0.0.0
     # 服务名称
@@ -11,14 +11,14 @@ settings:
     readtimeout: 1
     writertimeout: 2
     # 数据权限功能开关
-    enabledp: false
+    enabledp: true
   logger:
     # 日志存放路径
-    path: temp/logs
+    path: /var/log/project/
     # 日志输出，file：文件，default：命令行，其他：命令行
-    stdout: '' #控制台日志，启用后，不输出到文件
+    stdout: 'file' #控制台日志，启用后，不输出到文件
     # 日志等级, trace, debug, info, warn, error, fatal
-    level: trace
+    level: warn
     # 数据库日志开关
     enableddb: true
   jwt:

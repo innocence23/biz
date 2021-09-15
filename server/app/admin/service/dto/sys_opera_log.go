@@ -22,7 +22,8 @@ type SysOperaLogGetPageReq struct {
 }
 
 type SysOperaLogOrder struct {
-	CreatedAtOrder string `search:"type:order;column:created_at;table:sys_opera_log" form:"createdAtOrder"`
+	//CreatedAtOrder string `search:"type:order;column:created_at;table:sys_opera_log" form:"createdAtOrder"`
+	IdOrder string `search:"type:order;column:id;table:sys_opera_log" form:"id"`
 }
 
 func (m *SysOperaLogGetPageReq) GetNeedSearch() interface{} {

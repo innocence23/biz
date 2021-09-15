@@ -20,6 +20,7 @@ type SysLoginLogGetPageReq struct {
 type SysLoginLogOrder struct {
 	CreatedAtOrder string `search:"type:order;column:created_at;table:sys_login_log" form:"createdAtOrder"`
 }
+// OrderBy
 
 func (m *SysLoginLogGetPageReq) GetNeedSearch() interface{} {
 	return *m

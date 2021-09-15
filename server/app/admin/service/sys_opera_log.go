@@ -22,6 +22,7 @@ func (e *SysOperaLog) GetPage(c *dto.SysOperaLogGetPageReq, list *[]models.SysOp
 
 	err = e.Orm.Model(&data).
 		Scopes(
+			cDto.OrderDest("id", true),
 			cDto.MakeCondition(c.GetNeedSearch()),
 			cDto.Paginate(c.GetPageSize(), c.GetPageIndex()),
 		).

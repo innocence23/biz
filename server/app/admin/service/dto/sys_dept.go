@@ -80,6 +80,12 @@ func (s *SysDeptUpdateReq) Generate(model *models.SysDept) {
 	model.Phone = s.Phone
 	model.Email = s.Email
 	model.Status = s.Status
+	if s.CreateBy != 0 {
+		model.CreateBy = s.CreateBy
+	}
+	if s.UpdateBy != 0 {
+		model.UpdateBy = s.UpdateBy
+	}
 }
 
 // GetId 获取数据对应的ID

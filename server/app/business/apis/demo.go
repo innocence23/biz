@@ -1,7 +1,7 @@
 package apis
 
 import (
-    "fmt"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-admin-team/go-admin-core/sdk/api"
@@ -31,20 +31,20 @@ type Demo struct {
 // @Router /api/v1/demo [get]
 // @Security Bearer
 func (e Demo) GetPage(c *gin.Context) {
-    req := dto.DemoGetPageReq{}
-    s := service.Demo{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
-   		e.Logger.Error(err)
-   		e.Error(500, err, err.Error())
-   		return
-   	}
+	req := dto.DemoGetPageReq{}
+	s := service.Demo{}
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+		e.Logger.Error(err)
+		e.Error(500, err, err.Error())
+		return
+	}
 
 	p := actions.GetPermissionFromContext(c)
 	list := make([]models.Demo, 0)
 	var count int64
 	if err := s.GetPage(&req, p, &list, &count); err != nil {
 		e.Error(500, err, fmt.Sprintf("获取例子Demo 失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
 
 	e.PageOK(list, int(count), req.GetPageIndex(), req.GetPageSize(), "查询成功")
@@ -61,7 +61,7 @@ func (e Demo) GetPage(c *gin.Context) {
 func (e Demo) Get(c *gin.Context) {
 	req := dto.DemoGetReq{}
 	s := service.Demo{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
 		e.Logger.Error(err)
 		e.Error(500, err, err.Error())
 		return
@@ -71,10 +71,10 @@ func (e Demo) Get(c *gin.Context) {
 	p := actions.GetPermissionFromContext(c)
 	if err := s.Get(&req, p, &object); err != nil {
 		e.Error(500, err, fmt.Sprintf("获取例子Demo失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
 
-	e.OK( object, "查询成功")
+	e.OK(object, "查询成功")
 }
 
 // Insert 创建例子Demo
@@ -88,19 +88,20 @@ func (e Demo) Get(c *gin.Context) {
 // @Router /api/v1/demo [post]
 // @Security Bearer
 func (e Demo) Insert(c *gin.Context) {
-    req := dto.DemoInsertReq{}
-    s := service.Demo{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
-        e.Logger.Error(err)
-        e.Error(500, err, err.Error())
-        return
-    }
+	req := dto.DemoInsertReq{}
+	s := service.Demo{}
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+		e.Logger.Error(err)
+		e.Error(500, err, err.Error())
+		return
+	}
 	// 设置创建人
 	req.SetCreateBy(user.GetUserId(c))
+	req.SetUpdateBy(user.GetUserId(c))
 
 	if err := s.Insert(&req); err != nil {
 		e.Error(500, err, fmt.Sprintf("创建例子Demo  失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
 
 	e.OK(req.GetId(), "创建成功")
@@ -117,21 +118,20 @@ func (e Demo) Insert(c *gin.Context) {
 // @Router /api/v1/demo/{id} [put]
 // @Security Bearer
 func (e Demo) Update(c *gin.Context) {
-    req := dto.DemoUpdateReq{}
-    s := service.Demo{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
-        e.Logger.Error(err)
-        e.Error(500, err, err.Error())
-        return
-    }
+	req := dto.DemoUpdateReq{}
+	s := service.Demo{}
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+		e.Logger.Error(err)
+		e.Error(500, err, err.Error())
+		return
+	}
 	req.SetUpdateBy(user.GetUserId(c))
 	p := actions.GetPermissionFromContext(c)
-
 	if err := s.Update(&req, p); err != nil {
 		e.Error(500, err, fmt.Sprintf("修改例子Demo 失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
-	e.OK( req.GetId(), "修改成功")
+	e.OK(req.GetId(), "修改成功")
 }
 
 // Delete 删除例子Demo
@@ -143,20 +143,20 @@ func (e Demo) Update(c *gin.Context) {
 // @Router /api/v1/demo [delete]
 // @Security Bearer
 func (e Demo) Delete(c *gin.Context) {
-    s := service.Demo{}
-    req := dto.DemoDeleteReq{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
-        e.Logger.Error(err)
-        e.Error(500, err, err.Error())
-        return
-    }
+	s := service.Demo{}
+	req := dto.DemoDeleteReq{}
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+		e.Logger.Error(err)
+		e.Error(500, err, err.Error())
+		return
+	}
 
 	// req.SetUpdateBy(user.GetUserId(c))
 	p := actions.GetPermissionFromContext(c)
 
 	if err := s.Remove(&req, p); err != nil {
 		e.Error(500, err, fmt.Sprintf("删除例子Demo失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
-	e.OK( req.GetId(), "删除成功")
+	e.OK(req.GetId(), "删除成功")
 }

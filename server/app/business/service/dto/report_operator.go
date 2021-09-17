@@ -44,6 +44,12 @@ func (s *ReportOperatorInsertReq) Generate(model *models.ReportOperator) {
     model.Name = s.Name
     model.Phone = s.Phone
     model.Remark = s.Remark
+    if s.CreateBy != 0 {
+		model.CreateBy = s.CreateBy
+	}
+	if s.UpdateBy != 0 {
+		model.UpdateBy = s.UpdateBy
+	}
 }
 
 func (s *ReportOperatorInsertReq) GetId() interface{} {

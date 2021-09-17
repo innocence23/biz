@@ -1,7 +1,7 @@
 package apis
 
 import (
-    "fmt"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-admin-team/go-admin-core/sdk/api"
@@ -32,20 +32,20 @@ type Report struct {
 // @Router /api/v1/report [get]
 // @Security Bearer
 func (e Report) GetPage(c *gin.Context) {
-    req := dto.ReportGetPageReq{}
-    s := service.Report{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
-   		e.Logger.Error(err)
-   		e.Error(500, err, err.Error())
-   		return
-   	}
+	req := dto.ReportGetPageReq{}
+	s := service.Report{}
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+		e.Logger.Error(err)
+		e.Error(500, err, err.Error())
+		return
+	}
 
 	p := actions.GetPermissionFromContext(c)
 	list := make([]models.Report, 0)
 	var count int64
 	if err := s.GetPage(&req, p, &list, &count); err != nil {
 		e.Error(500, err, fmt.Sprintf("获取报告 失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
 
 	e.PageOK(list, int(count), req.GetPageIndex(), req.GetPageSize(), "查询成功")
@@ -62,7 +62,7 @@ func (e Report) GetPage(c *gin.Context) {
 func (e Report) Get(c *gin.Context) {
 	req := dto.ReportGetReq{}
 	s := service.Report{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
 		e.Logger.Error(err)
 		e.Error(500, err, err.Error())
 		return
@@ -72,10 +72,10 @@ func (e Report) Get(c *gin.Context) {
 	p := actions.GetPermissionFromContext(c)
 	if err := s.Get(&req, p, &object); err != nil {
 		e.Error(500, err, fmt.Sprintf("获取报告失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
 
-	e.OK( object, "查询成功")
+	e.OK(object, "查询成功")
 }
 
 // Insert 创建报告
@@ -89,19 +89,20 @@ func (e Report) Get(c *gin.Context) {
 // @Router /api/v1/report [post]
 // @Security Bearer
 func (e Report) Insert(c *gin.Context) {
-    req := dto.ReportInsertReq{}
-    s := service.Report{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
-        e.Logger.Error(err)
-        e.Error(500, err, err.Error())
-        return
-    }
+	req := dto.ReportInsertReq{}
+	s := service.Report{}
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+		e.Logger.Error(err)
+		e.Error(500, err, err.Error())
+		return
+	}
 	// 设置创建人
 	req.SetCreateBy(user.GetUserId(c))
+	req.SetUpdateBy(user.GetUserId(c))
 
 	if err := s.Insert(&req); err != nil {
 		e.Error(500, err, fmt.Sprintf("创建报告  失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
 
 	e.OK(req.GetId(), "创建成功")
@@ -118,21 +119,21 @@ func (e Report) Insert(c *gin.Context) {
 // @Router /api/v1/report/{id} [put]
 // @Security Bearer
 func (e Report) Update(c *gin.Context) {
-    req := dto.ReportUpdateReq{}
-    s := service.Report{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
-        e.Logger.Error(err)
-        e.Error(500, err, err.Error())
-        return
-    }
+	req := dto.ReportUpdateReq{}
+	s := service.Report{}
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+		e.Logger.Error(err)
+		e.Error(500, err, err.Error())
+		return
+	}
 	req.SetUpdateBy(user.GetUserId(c))
 	p := actions.GetPermissionFromContext(c)
 
 	if err := s.Update(&req, p); err != nil {
 		e.Error(500, err, fmt.Sprintf("修改报告 失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
-	e.OK( req.GetId(), "修改成功")
+	e.OK(req.GetId(), "修改成功")
 }
 
 // Delete 删除报告
@@ -144,20 +145,20 @@ func (e Report) Update(c *gin.Context) {
 // @Router /api/v1/report [delete]
 // @Security Bearer
 func (e Report) Delete(c *gin.Context) {
-    s := service.Report{}
-    req := dto.ReportDeleteReq{}
-    if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
-        e.Logger.Error(err)
-        e.Error(500, err, err.Error())
-        return
-    }
+	s := service.Report{}
+	req := dto.ReportDeleteReq{}
+	if err := e.MakeContext(c).MakeOrm().Bind(&req).MakeService(&s.Service).Errors; err != nil {
+		e.Logger.Error(err)
+		e.Error(500, err, err.Error())
+		return
+	}
 
 	// req.SetUpdateBy(user.GetUserId(c))
 	p := actions.GetPermissionFromContext(c)
 
 	if err := s.Remove(&req, p); err != nil {
 		e.Error(500, err, fmt.Sprintf("删除报告失败，\r\n失败信息 %s", err.Error()))
-        return
+		return
 	}
-	e.OK( req.GetId(), "删除成功")
+	e.OK(req.GetId(), "删除成功")
 }

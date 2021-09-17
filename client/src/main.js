@@ -21,7 +21,6 @@ import permission from './directive/permission'
 
 import { getDicts } from '@/api/admin/dict/data'
 import { getItems, setItems } from '@/api/table'
-import { getConfigKey } from '@/api/admin/sys-config'
 import { parseTime, resetForm, addDateRange, selectDictLabel, /* download,*/ selectItemsLabel } from '@/utils/costum'
 
 import './icons' // icon
@@ -45,7 +44,6 @@ import '@/utils/dialog'
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getItems = getItems
 Vue.prototype.setItems = setItems
-Vue.prototype.getConfigKey = getConfigKey
 Vue.prototype.parseTime = parseTime
 Vue.prototype.resetForm = resetForm
 Vue.prototype.addDateRange = addDateRange

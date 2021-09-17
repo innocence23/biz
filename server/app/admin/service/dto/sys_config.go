@@ -59,7 +59,12 @@ func (s *SysConfigControl) Generate(model *models.SysConfig) {
 	model.ConfigType = s.ConfigType
 	model.IsFrontend = s.IsFrontend
 	model.Remark = s.Remark
-
+	if s.CreateBy != 0 {
+		model.CreateBy = s.CreateBy
+	}
+	if s.UpdateBy != 0 {
+		model.UpdateBy = s.UpdateBy
+	}
 }
 
 // GetId 获取数据对应的ID

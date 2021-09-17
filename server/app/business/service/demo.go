@@ -2,8 +2,9 @@ package service
 
 import (
 	"errors"
+	"fmt"
 
-    "github.com/go-admin-team/go-admin-core/sdk/service"
+	"github.com/go-admin-team/go-admin-core/sdk/service"
 	"gorm.io/gorm"
 
 	"maktub/app/business/models"
@@ -59,9 +60,9 @@ func (e *Demo) Get(d *dto.DemoGetReq, p *actions.DataPermission, model *models.D
 
 // Insert 创建Demo对象
 func (e *Demo) Insert(c *dto.DemoInsertReq) error {
-    var err error
-    var data models.Demo
-    c.Generate(&data)
+	var err error
+	var data models.Demo
+	c.Generate(&data)
 	err = e.Orm.Create(&data).Error
 	if err != nil {
 		e.Log.Errorf("DemoService Insert error:%s \r\n", err)
@@ -72,22 +73,23 @@ func (e *Demo) Insert(c *dto.DemoInsertReq) error {
 
 // Update 修改Demo对象
 func (e *Demo) Update(c *dto.DemoUpdateReq, p *actions.DataPermission) error {
-    var err error
-    var data = models.Demo{}
-    e.Orm.Scopes(
-            actions.Permission(data.TableName(), p),
-        ).First(&data, c.GetId())
-    c.Generate(&data)
+	var err error
+	var data = models.Demo{}
+	e.Orm.Scopes(
+		actions.Permission(data.TableName(), p),
+	).First(&data, c.GetId())
+	c.Generate(&data)
+	fmt.Printf("-------%#v\n\n", data)
 
-    db := e.Orm.Save(&data)
-    if db.Error != nil {
-        e.Log.Errorf("DemoService Save error:%s \r\n", err)
-        return err
-    }
-    if db.RowsAffected == 0 {
-        return errors.New("无权更新该数据")
-    }
-    return nil
+	db := e.Orm.Save(&data)
+	if db.Error != nil {
+		e.Log.Errorf("DemoService Save error:%s \r\n", err)
+		return err
+	}
+	if db.RowsAffected == 0 {
+		return errors.New("无权更新该数据")
+	}
+	return nil
 }
 
 // Remove 删除Demo
@@ -99,11 +101,11 @@ func (e *Demo) Remove(d *dto.DemoDeleteReq, p *actions.DataPermission) error {
 			actions.Permission(data.TableName(), p),
 		).Delete(&data, d.GetId())
 	if err := db.Error; err != nil {
-        e.Log.Errorf("Service RemoveDemo error:%s \r\n", err)
-        return err
-    }
-    if db.RowsAffected == 0 {
-        return errors.New("无权删除该数据")
-    }
+		e.Log.Errorf("Service RemoveDemo error:%s \r\n", err)
+		return err
+	}
+	if db.RowsAffected == 0 {
+		return errors.New("无权删除该数据")
+	}
 	return nil
 }

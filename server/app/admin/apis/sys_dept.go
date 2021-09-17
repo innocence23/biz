@@ -109,6 +109,7 @@ func (e SysDept) Insert(c *gin.Context) {
 
 	// 设置创建人
 	req.SetCreateBy(user.GetUserId(c))
+	req.SetUpdateBy(user.GetUserId(c))
 	err = s.Insert(&req)
 	if err != nil {
 		e.Error(500, err, "创建失败")

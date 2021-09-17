@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"maktub/common"
@@ -107,8 +106,7 @@ func SetDBOperLog(c *gin.Context, clientIP string, statusCode int, reqUri string
 	l["_fullPath"] = c.FullPath()
 	l["operUrl"] = reqUri
 	l["operIp"] = clientIP
-	fmt.Println("gaConfig.ExtConfig.AMap.Key", gaConfig.ExtConfig.AMap.Key)
-	l["operLocation"] = pkg.GetLocation(clientIP, gaConfig.ExtConfig.AMap.Key)
+	l["operLocation"] = pkg.GetLocation(clientIP, gaConfig.ExtConfig.AMap.Key) //todo
 	l["operName"] = user.GetUserName(c)
 	l["requestMethod"] = c.Request.Method
 	l["operParam"] = body

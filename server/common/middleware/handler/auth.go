@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"maktub/app/admin/models"
 	"maktub/common"
 	"net/http"
@@ -120,8 +119,7 @@ func LoginLogToDB(c *gin.Context, status string, msg string, username string) {
 
 	ua := user_agent.New(c.Request.UserAgent())
 	l["ipaddr"] = common.GetClientIP(c)
-	fmt.Println("gaConfig.ExtConfig.AMap.Key", gaConfig.ExtConfig.AMap.Key)
-	l["loginLocation"] = pkg.GetLocation(common.GetClientIP(c),gaConfig.ExtConfig.AMap.Key)
+	l["loginLocation"] = pkg.GetLocation(common.GetClientIP(c), gaConfig.ExtConfig.AMap.Key) //todo
 	l["loginTime"] = pkg.GetCurrentTime()
 	l["status"] = status
 	l["remark"] = c.Request.UserAgent()

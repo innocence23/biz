@@ -64,7 +64,12 @@ func (s *SysDictTypeUpdateReq) Generate(model *models.SysDictType) {
 	model.DictType = s.DictType
 	model.Status = s.Status
 	model.Remark = s.Remark
-
+	if s.CreateBy != 0 {
+		model.CreateBy = s.CreateBy
+	}
+	if s.UpdateBy != 0 {
+		model.UpdateBy = s.UpdateBy
+	}
 }
 
 func (s *SysDictTypeUpdateReq) GetId() interface{} {

@@ -111,6 +111,7 @@ func (e SysPost) Insert(c *gin.Context) {
 		return
 	}
 	req.SetCreateBy(user.GetUserId(c))
+	req.SetUpdateBy(user.GetUserId(c))	
 	err = s.Insert(&req)
 	if err != nil {
 		e.Error(500, err, fmt.Sprintf("新建岗位失败！错误详情：%s", err.Error()))

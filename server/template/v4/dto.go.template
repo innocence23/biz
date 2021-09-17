@@ -70,8 +70,14 @@ func (s *{{.ClassName}}InsertReq) Generate(model *models.{{.ClassName}}) {
     {{- else if eq .GoField "CreatedAt" -}}
     {{- else if eq .GoField "UpdatedAt" -}}
     {{- else if eq .GoField "DeletedAt" -}}
-    {{- else if eq .GoField "CreateBy" -}}
-    {{- else if eq .GoField "UpdateBy" -}}
+    {{- else if eq .GoField "CreateBy" }}
+    if s.{{.GoField}} != 0 {
+        model.{{.GoField}} = s.{{.GoField}}
+    }
+    {{- else if eq .GoField "UpdateBy" }}
+    if s.{{.GoField}} != 0 {
+        model.{{.GoField}} = s.{{.GoField}}
+    }
     {{- else }}
     model.{{.GoField}} = s.{{.GoField}}
     {{- end -}}

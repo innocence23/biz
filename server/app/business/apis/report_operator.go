@@ -95,6 +95,7 @@ func (e ReportOperator) Insert(c *gin.Context) {
     }
 	// 设置创建人
 	req.SetCreateBy(user.GetUserId(c))
+	req.SetUpdateBy(user.GetUserId(c))
 
 	if err := s.Insert(&req); err != nil {
 		e.Error(500, err, fmt.Sprintf("创建报告名单  失败，\r\n失败信息 %s", err.Error()))

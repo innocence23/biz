@@ -64,6 +64,12 @@ func (s *SysRoleInsertReq) Generate(model *models.SysRole) {
 	model.DataScope = s.DataScope
 	model.SysMenu = &s.SysMenu
 	model.SysDept = s.SysDept
+	if s.CreateBy != 0 {
+		model.CreateBy = s.CreateBy
+	}
+	if s.UpdateBy != 0 {
+		model.UpdateBy = s.UpdateBy
+	}
 }
 
 func (s *SysRoleInsertReq) GetId() interface{} {

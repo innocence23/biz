@@ -69,6 +69,12 @@ func (s *SysApiUpdateReq) Generate(model *models.SysApi) {
 	model.Path = s.Path
 	model.Type = s.Type
 	model.Action = s.Action
+	if s.CreateBy != 0 {
+		model.CreateBy = s.CreateBy
+	}
+	if s.UpdateBy != 0 {
+		model.UpdateBy = s.UpdateBy
+	}
 }
 
 func (s *SysApiUpdateReq) GetId() interface{} {

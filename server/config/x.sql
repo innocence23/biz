@@ -1009,3 +1009,15 @@ INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$/Glr4g9Svr6O0kvjsRJCXu3f0W8/d
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+FROM hub.xesv5.com/library/golang:1.12.7-alpine
+## FROM行由前端生成，请不要改动
+ADD ./git-resource /home/www/fn_plat
+RUN chmod +x /home/www/fn_plat/bin/fn_plat
+WORKDIR  /home/www/fn_plat/
+CMD ["bin/fn_plat_queue"]
+
+#!/usr/bin/env bash
+make
+cp conf/conf_online.ini conf/conf.ini

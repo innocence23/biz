@@ -77,6 +77,12 @@ func (s *ReportInsertReq) Generate(model *models.Report) {
 	model.Other = s.Other
 	model.Phone = s.Phone
 	model.Remark = s.Remark
+	if s.CreateBy != 0 {
+		model.CreateBy = s.CreateBy
+	}
+	if s.UpdateBy != 0 {
+		model.UpdateBy = s.UpdateBy
+	}
 }
 
 func (s *ReportInsertReq) GetId() interface{} {

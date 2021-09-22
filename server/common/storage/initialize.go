@@ -1,10 +1,3 @@
-/*
- * @Author: lwnmengjing
- * @Date: 2021/6/10 3:39 下午
- * @Last Modified by: lwnmengjing
- * @Last Modified time: 2021/6/10 3:39 下午
- */
-
 package storage
 
 import (

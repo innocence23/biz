@@ -16,7 +16,6 @@
           slot="label"
           tag="span"
           class="tags-view-item"
-          :style="{ color: item.fullPath === $route.fullPath ? theme : '' }"
           :to="{ path: item.path, query: item.query, fullPath: item.fullPath }"
           @contextmenu.prevent.native="openMenu(item,$event)"
         >
@@ -24,7 +23,7 @@
         </router-link>
       </el-tab-pane>
     </el-tabs>
-    <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
+    <ul v-show="visible" class="contextmenu">
       <li class="tags-item" @click="refreshSelectedTag(selectedTag)" @mouseover="handleTagsOver(1)" @mouseleave="handleTagsLeave(1)">刷新当前标签页</li>
       <li v-if="!isAffix(selectedTag)" class="tags-item" @click="closeSelectedTag(selectedTag)" @mouseover="handleTagsOver(2)" @mouseleave="handleTagsLeave(2)">关闭当前标签页</li>
       <li class="tags-item" @click="closeOthersTags" @mouseover="handleTagsOver(3)" @mouseleave="handleTagsLeave(3)">关闭其他标签页</li>
@@ -79,14 +78,10 @@ export default {
     handleTagsOver(index) {
       const tags = document.querySelectorAll('.tags-item')
       const item = tags[index - 1]
-      item.style.cssText = `color:${this.$store.state.settings.theme};background:${
-        this.$store.state.settings.theme.colorRgb()
-      }`
     },
     handleTagsLeave(index) {
       const tags = document.querySelectorAll('.tags-item')
       const item = tags[index - 1]
-      item.style.cssText = `color:#606266`
     },
     isActive() {
       const index = this.visitedViews.findIndex(item => item.fullPath === this.$route.fullPath)

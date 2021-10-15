@@ -17,6 +17,7 @@ func sysNoCheckRoleRouter(v1 *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddlew
 	{
 		sys := apis.System{}
 		r1.GET("/captcha", sys.GenerateCaptchaHandler)
+
 	}
 
 	r := v1.Group("").Use(authMiddleware.MiddlewareFunc())

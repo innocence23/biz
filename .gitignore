@@ -18,3 +18,5 @@ client/tests/**/coverage/
 client/tests/e2e/reports
 client/package-lock.json
 client/yarn.lock
+
+mysqldataz/

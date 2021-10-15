@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : biz
+ Source Server         : work
  Source Server Type    : MySQL
- Source Server Version : 50734
+ Source Server Version : 50725
  Source Host           : localhost:33061
- Source Schema         : x
+ Source Schema         : work
 
  Target Server Type    : MySQL
- Target Server Version : 50734
+ Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 14/09/2021 15:43:46
+ Date: 15/10/2021 16:33:51
 */
 
 SET NAMES utf8mb4;
@@ -80,7 +80,7 @@ CREATE TABLE `report` (
 -- Records of report
 -- ----------------------------
 BEGIN;
-INSERT INTO `report` VALUES (1, '李善文--山东省林业科学研究院', 2, 1300.00, '1', 0, 'http://api.biz.test/static/uploadfile/aa755672-d132-48e7-8cce-6525378c41cb.xlsx', 'http://api.biz.test/static/uploadfile/4e6f4572-1078-4285-95b4-3572cd23f814.jpeg', 'http://api.biz.test/static/uploadfile/8b268df0-9e81-4c47-bc3a-5045c7e757df.jpg', 'http://api.biz.test/static/uploadfile/b1fdf9c2-4527-4b72-a5be-6d018ce38fd1.jpg', 'http://api.biz.test/static/uploadfile/92573b29-ace0-4e16-8016-bebc55124194.png', 'http://api.biz.test/static/uploadfile/5a0f9035-5b98-4113-b931-7cc4bad52fc4.xlsx', '13439383938', '已交---=', 0, 0, '2021-09-13 07:50:41', '2021-09-14 03:13:45', NULL);
+INSERT INTO `report` VALUES (1, '李善文--山东省林业科学研究院', 2, 1300.00, '1', 0, 'http://api.biz.test/static/uploadfile/aa755672-d132-48e7-8cce-6525378c41cb.xlsx', 'http://api.biz.test/static/uploadfile/4e6f4572-1078-4285-95b4-3572cd23f814.jpeg', 'http://api.biz.test/static/uploadfile/8b268df0-9e81-4c47-bc3a-5045c7e757df.jpg', 'http://api.biz.test/static/uploadfile/bad55550-687d-41f9-93c2-aa98abb074c2.jpg', 'http://api.biz.test/static/uploadfile/92573b29-ace0-4e16-8016-bebc55124194.png', 'http://api.biz.test/static/uploadfile/5a0f9035-5b98-4113-b931-7cc4bad52fc4.xlsx', '13439383938', '已交---=', 0, 0, '2021-09-13 07:50:41', '2021-10-15 08:32:36', NULL);
 INSERT INTO `report` VALUES (2, '中建八局第一建设有限公司-李帅', 0, 3000.00, '4', 1, 'http://api.biz.test/static/uploadfile/bccaf1ce-62eb-43b8-a487-1f6a55891a9a.jpeg', 'http://api.biz.test/static/uploadfile/5534f575-d400-4f66-97b8-894edd4264bb.jpeg', 'http://api.biz.test/static/uploadfile/ab65ea0a-c356-44a8-a35d-2a45ea932707.jpeg', 'http://api.biz.test/static/uploadfile/c1c35a12-7533-4f71-87fe-f96aa6c568e7.jpeg', 'http://api.biz.test/static/uploadfile/c7cfeb34-5d91-4cd5-bf25-fd31c401af80.png', '', '13439383232', '', 0, 0, '2021-09-13 07:56:57', '2021-09-14 03:14:04', NULL);
 COMMIT;
 
@@ -311,8 +311,8 @@ CREATE TABLE `sys_config` (
 -- Records of sys_config
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_config` VALUES (1, '系统名称', 'sys_app_name', 'admin管理系统', 'Y', '1', '', 1, 0, '2021-03-17 08:52:06', '2021-09-08 10:20:06', NULL);
-INSERT INTO `sys_config` VALUES (2, '系统logo', 'sys_app_logo', 'http://api.biz.test/static/uploadfile/118dbaaa-9e7c-413c-aa74-69ca9c88d273.jpg', 'Y', '1', '', 1, 0, '2021-03-17 08:53:19', '2021-09-13 06:50:36', NULL);
+INSERT INTO `sys_config` VALUES (1, '系统名称', 'sys_app_name', 'Admin管理系统', 'Y', '1', '', 1, 0, '2021-03-17 08:52:06', '2021-10-15 08:32:59', NULL);
+INSERT INTO `sys_config` VALUES (2, '系统logo', 'sys_app_logo', 'http://api.biz.test/static/uploadfile/4ac73d45-5ab3-451c-8af6-02a72880ddad.jpg', 'Y', '1', '', 1, 0, '2021-03-17 08:53:19', '2021-10-15 08:32:59', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -1005,7 +1005,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$/Glr4g9Svr6O0kvjsRJCXu3f0W8/dsP3XZyVNi1019ratWpSPMyw.', 'zhangwj', '13818888888', 1, '', '', '1', '1@qq.com', 1, 1, '', '2', 1, 1, '2021-05-13 19:56:37.914', '2021-05-13 19:56:40.205', NULL);
+INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$/Glr4g9Svr6O0kvjsRJCXu3f0W8/dsP3XZyVNi1019ratWpSPMyw.', 'nickname', '13818888888', 1, '', '/static/uploadfile/38d70986-cd89-4838-9b52-9e386717eac0.jpg', '1', 'admin@admin.com', 1, 1, '', '2', 1, 1, '2021-05-13 19:56:37.914', '2021-10-15 08:31:53.439', NULL);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

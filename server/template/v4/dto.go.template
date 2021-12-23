@@ -65,18 +65,18 @@ func (s *{{.ClassName}}InsertReq) Generate(model *models.{{.ClassName}}) {
 	{{$x := .Pk}}
 	{{- if ($x) }}
 	if s.{{.GoField}} == 0 {
-	   model.Model = common.Model{ {{.GoField}}: s.{{.GoField}} }
+		model.Model = common.Model{ {{.GoField}}: s.{{.GoField}} }
 	}
 	{{- else if eq .GoField "CreatedAt" -}}
 	{{- else if eq .GoField "UpdatedAt" -}}
 	{{- else if eq .GoField "DeletedAt" -}}
 	{{- else if eq .GoField "CreateBy" }}
 	if s.{{.GoField}} != 0 {
-	   model.{{.GoField}} = s.{{.GoField}}
+		model.{{.GoField}} = s.{{.GoField}}
 	}
 	{{- else if eq .GoField "UpdateBy" }}
 	if s.{{.GoField}} != 0 {
-	   model.{{.GoField}} = s.{{.GoField}}
+		model.{{.GoField}} = s.{{.GoField}}
 	}
 	{{- else }}
 	model.{{.GoField}} = s.{{.GoField}}
@@ -110,7 +110,7 @@ func (s *{{.ClassName}}UpdateReq) Generate(model *models.{{.ClassName}}) {
 	{{$x := .Pk}}
 	{{- if ($x) }}
 	if s.{{.GoField}} == 0 {
-	   model.Model = common.Model{ {{.GoField}}: s.{{.GoField}} }
+		model.Model = common.Model{ {{.GoField}}: s.{{.GoField}} }
 	}
 	{{- else if eq .GoField "CreatedAt" -}}
 	{{- else if eq .GoField "UpdatedAt" -}}
@@ -136,6 +136,7 @@ type {{.ClassName}}GetReq struct {
 	{{- end }}
 	{{- end }}
 }
+
 func (s *{{.ClassName}}GetReq) GetId() interface{} {
 	return s.{{.PkGoField}}
 }

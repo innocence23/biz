@@ -1,4 +1,4 @@
-package middleware
+package setting
 
 type UrlInfo struct {
 	Url    string

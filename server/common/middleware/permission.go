@@ -1,10 +1,10 @@
 package middleware
 
 import (
+	"maktub/setting"
 	"net/http"
 
 	"github.com/casbin/casbin/v2/util"
-
 	"github.com/gin-gonic/gin"
 	"github.com/go-admin-team/go-admin-core/sdk"
 	"github.com/go-admin-team/go-admin-core/sdk/api"
@@ -27,7 +27,7 @@ func AuthCheckRole() gin.HandlerFunc {
 			c.Next()
 			return
 		}
-		for _, i := range CasbinExclude {
+		for _, i := range setting.CasbinExclude {
 			if util.KeyMatch2(c.Request.URL.Path, i.Url) && c.Request.Method == i.Method {
 				casbinExclude = true
 				break

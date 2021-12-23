@@ -9,11 +9,13 @@ import (
 	"strings"
 
 	"github.com/bitly/go-simplejson"
+	"github.com/casbin/casbin/v2/util"
 	"github.com/go-admin-team/go-admin-core/sdk"
 	"github.com/go-admin-team/go-admin-core/sdk/runtime"
 	"github.com/go-admin-team/go-admin-core/storage"
 
 	"maktub/common/models"
+	"maktub/setting"
 )
 
 type SysApi struct {
@@ -55,6 +57,18 @@ func SaveSysApi(message storage.Messager) (err error) {
 	dbList := sdk.Runtime.GetDb()
 	for _, d := range dbList {
 		for _, v := range l.List {
+			// 不验证权限的，不写入权限表
+			casbinExclude := false
+			for _, i := range setting.CasbinExclude {
+				if util.KeyMatch2(v.RelativePath, i.Url) && v.HttpMethod == i.Method {
+					casbinExclude = true
+					break
+				}
+			}
+			if casbinExclude {
+				continue
+			}
+
 			if v.HttpMethod != "HEAD" ||
 				strings.Contains(v.RelativePath, "/swagger/") ||
 				strings.Contains(v.RelativePath, "/static/") ||
@@ -72,7 +86,10 @@ func SaveSysApi(message storage.Messager) (err error) {
 					urlPath = reg.ReplaceAllString(v.RelativePath, "${1}/{${2}}") // 把:id换成{id}
 				}
 				apiTitle, _ := jsonData.Get("paths").Get(urlPath).Get(strings.ToLower(v.HttpMethod)).Get("summary").String()
-
+				apiTag, _ := jsonData.Get("paths").Get(urlPath).Get(strings.ToLower(v.HttpMethod)).Get("tags").StringArray()
+				if len(apiTag) > 0 {
+					apiTitle = fmt.Sprintf("[%s] %s", apiTag[0], apiTitle)
+				}
 				err := d.Debug().Where(SysApi{Path: v.RelativePath, Action: v.HttpMethod}).
 					Attrs(SysApi{Handle: v.Handler, Title: apiTitle}).
 					FirstOrCreate(&SysApi{}).

@@ -92,6 +92,14 @@ func (e SysTable) Get(c *gin.Context) {
 	e.OK(mp, "")
 }
 
+// Get
+// @Summary 获取配置
+// @Description 获取JSON
+// @Tags 工具 / 生成工具
+// @Param tableName query string false "tableName / 数据表名称"
+// @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
+// @Router /api/v1/sys/tables/info [get]
+// @Security Bearer
 func (e SysTable) GetSysTableInfo(c *gin.Context) {
 	e.Context = c
 	log := e.GetLogger()

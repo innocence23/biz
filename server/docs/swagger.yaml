@@ -1458,7 +1458,7 @@ paths:
       - Bearer: []
       summary: 删除部门
       tags:
-      - 部门
+      - 部门管理
     get:
       description: 分页列表
       parameters:
@@ -1483,7 +1483,7 @@ paths:
       - Bearer: []
       summary: 分页部门列表数据
       tags:
-      - 部门
+      - 部门管理
     post:
       consumes:
       - application/json
@@ -1504,8 +1504,8 @@ paths:
       - Bearer: []
       summary: 添加部门
       tags:
-      - 部门
-  /api/v1/dept/{deptId}:
+      - 部门管理
+  /api/v1/dept/{id}:
     get:
       description: 获取JSON
       parameters:
@@ -1522,7 +1522,7 @@ paths:
       - Bearer: []
       summary: 获取部门数据
       tags:
-      - 部门
+      - 部门管理
     put:
       consumes:
       - application/json
@@ -1548,7 +1548,7 @@ paths:
       - Bearer: []
       summary: 修改部门
       tags:
-      - 部门
+      - 部门管理
   /api/v1/dict-data/option-select:
     get:
       description: 数据字典根据key获取
@@ -1789,7 +1789,7 @@ paths:
       summary: 字典类型全部数据 代码生成使用接口
       tags:
       - 字典类型
-  /api/v1/dict/type/{dictId}:
+  /api/v1/dict/type/{id}:
     get:
       description: 获取JSON
       parameters:
@@ -1889,7 +1889,7 @@ paths:
       - Bearer: []
       summary: 删除菜单
       tags:
-      - 菜单
+      - 菜单管理
     get:
       description: 获取JSON
       parameters:
@@ -1906,7 +1906,7 @@ paths:
       - Bearer: []
       summary: Menu列表数据
       tags:
-      - 菜单
+      - 菜单管理
     post:
       consumes:
       - application/json
@@ -1927,7 +1927,7 @@ paths:
       - Bearer: []
       summary: 创建菜单
       tags:
-      - 菜单
+      - 菜单管理
   /api/v1/menu/{id}:
     get:
       description: 获取JSON
@@ -1945,7 +1945,7 @@ paths:
       - Bearer: []
       summary: Menu详情数据
       tags:
-      - 菜单
+      - 菜单管理
     put:
       consumes:
       - application/json
@@ -1971,7 +1971,7 @@ paths:
       - Bearer: []
       summary: 修改菜单
       tags:
-      - 菜单
+      - 菜单管理
   /api/v1/menuTreeselect/{roleId}:
     get:
       consumes:
@@ -1992,7 +1992,7 @@ paths:
       - Bearer: []
       summary: 角色修改使用的菜单列表
       tags:
-      - 菜单
+      - 菜单管理
   /api/v1/menurole:
     get:
       description: 获取JSON
@@ -2005,7 +2005,7 @@ paths:
       - Bearer: []
       summary: 根据登录角色名称获取菜单列表数据（左菜单使用）
       tags:
-      - 菜单
+      - 菜单管理
   /api/v1/post:
     delete:
       description: 删除数据
@@ -2025,7 +2025,7 @@ paths:
       - Bearer: []
       summary: 删除岗位
       tags:
-      - 岗位
+      - 岗位管理
     get:
       description: 获取JSON
       parameters:
@@ -2054,7 +2054,7 @@ paths:
       - Bearer: []
       summary: 岗位列表数据
       tags:
-      - 岗位
+      - 岗位管理
     post:
       consumes:
       - application/json
@@ -2075,8 +2075,26 @@ paths:
       - Bearer: []
       summary: 添加岗位
       tags:
-      - 岗位
+      - 岗位管理
   /api/v1/post/{id}:
+    get:
+      description: 获取JSON
+      parameters:
+      - description: 编码
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: '{"code": 200, "data": [...]}'
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 获取岗位信息
+      tags:
+      - 岗位管理
     put:
       consumes:
       - application/json
@@ -2097,26 +2115,7 @@ paths:
       - Bearer: []
       summary: 修改岗位
       tags:
-      - 岗位
-  /api/v1/post/{postId}:
-    get:
-      description: 获取JSON
-      parameters:
-      - description: 编码
-        in: path
-        name: id
-        required: true
-        type: integer
-      responses:
-        "200":
-          description: '{"code": 200, "data": [...]}'
-          schema:
-            $ref: '#/definitions/response.Response'
-      security:
-      - Bearer: []
-      summary: 获取岗位信息
-      tags:
-      - 岗位
+      - 岗位管理
   /api/v1/public/uploadFile:
     post:
       consumes:
@@ -2420,7 +2419,7 @@ paths:
       - Bearer: []
       summary: 删除用户角色
       tags:
-      - 角色/Role
+      - 角色管理
     get:
       description: Get JSON
       parameters:
@@ -2453,7 +2452,7 @@ paths:
       - Bearer: []
       summary: 角色列表数据
       tags:
-      - 角色/Role
+      - 角色管理
     post:
       consumes:
       - application/json
@@ -2474,8 +2473,8 @@ paths:
       - Bearer: []
       summary: 创建角色
       tags:
-      - 角色/Role
-  /api/v1/role-status/{id}:
+      - 角色管理
+  /api/v1/role-status:
     put:
       consumes:
       - application/json
@@ -2486,7 +2485,7 @@ paths:
         name: data
         required: true
         schema:
-          $ref: '#/definitions/dto.RoleDataScopeReq'
+          $ref: '#/definitions/dto.UpdateStatusReq'
       responses:
         "200":
           description: '{"code": 200, "data": [...]}'
@@ -2494,9 +2493,9 @@ paths:
             $ref: '#/definitions/response.Response'
       security:
       - Bearer: []
-      summary: 更新角色数据权限
+      summary: 修改用户角色
       tags:
-      - 角色/Role
+      - 角色管理
   /api/v1/role/{id}:
     get:
       description: 获取JSON
@@ -2514,7 +2513,7 @@ paths:
       - Bearer: []
       summary: 获取Role数据
       tags:
-      - 角色/Role
+      - 角色管理
     put:
       consumes:
       - application/json
@@ -2535,7 +2534,29 @@ paths:
       - Bearer: []
       summary: 修改用户角色
       tags:
-      - 角色/Role
+      - 角色管理
+  /api/v1/roledatascope:
+    put:
+      consumes:
+      - application/json
+      description: 获取JSON
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RoleDataScopeReq'
+      responses:
+        "200":
+          description: '{"code": 200, "data": [...]}'
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 更新角色数据权限
+      tags:
+      - 角色管理
   /api/v1/server-monitor:
     get:
       description: 获取JSON
@@ -2888,6 +2909,24 @@ paths:
       tags:
       - 操作日志
   /api/v1/sys-user:
+    delete:
+      description: 删除数据
+      parameters:
+      - description: userId
+        in: path
+        name: userId
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: '{"code": 200, "data": [...]}'
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 删除用户数据
+      tags:
+      - 用户管理
     get:
       description: 获取JSON
       parameters:
@@ -2904,7 +2943,7 @@ paths:
       - Bearer: []
       summary: 列表用户信息数据
       tags:
-      - 用户
+      - 用户管理
     post:
       consumes:
       - application/json
@@ -2925,44 +2964,7 @@ paths:
       - Bearer: []
       summary: 创建用户
       tags:
-      - 用户
-  /api/v1/sys-user/{userId}:
-    delete:
-      description: 删除数据
-      parameters:
-      - description: userId
-        in: path
-        name: userId
-        required: true
-        type: integer
-      responses:
-        "200":
-          description: '{"code": 200, "data": [...]}'
-          schema:
-            $ref: '#/definitions/response.Response'
-      security:
-      - Bearer: []
-      summary: 删除用户数据
-      tags:
-      - 用户
-    get:
-      description: 获取JSON
-      parameters:
-      - description: 用户编码
-        in: path
-        name: userId
-        required: true
-        type: integer
-      responses:
-        "200":
-          description: '{"code": 200, "data": [...]}'
-          schema:
-            $ref: '#/definitions/response.Response'
-      security:
-      - Bearer: []
-      summary: 获取用户
-      tags:
-      - 用户
+      - 用户管理
     put:
       consumes:
       - application/json
@@ -2983,8 +2985,44 @@ paths:
       - Bearer: []
       summary: 修改用户数据
       tags:
-      - 用户
+      - 用户管理
+  /api/v1/sys-user/{id}:
+    get:
+      description: 获取JSON
+      parameters:
+      - description: 用户编码
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: '{"code": 200, "data": [...]}'
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 获取用户
+      tags:
+      - 用户管理
   /api/v1/sys/tables/info:
+    get:
+      description: 获取JSON
+      parameters:
+      - description: tableName / 数据表名称
+        in: query
+        name: tableName
+        type: string
+      responses:
+        "200":
+          description: '{"code": 200, "data": [...]}'
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 获取配置
+      tags:
+      - 工具 / 生成工具
     post:
       consumes:
       - application/json
@@ -3139,7 +3177,7 @@ paths:
       - Bearer: []
       summary: 重置用户密码
       tags:
-      - 用户
+      - 用户管理
   /api/v1/user/pwd/set:
     put:
       consumes:
@@ -3161,7 +3199,7 @@ paths:
       - Bearer: []
       summary: 重置密码
       tags:
-      - 用户
+      - 用户管理
   /api/v1/user/status:
     put:
       consumes:
@@ -3183,7 +3221,7 @@ paths:
       - Bearer: []
       summary: 修改用户状态
       tags:
-      - 用户
+      - 用户管理
   /logout:
     post:
       consumes:

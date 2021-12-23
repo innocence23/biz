@@ -59,7 +59,7 @@ func (e SysDictType) GetPage(c *gin.Context) {
 // @Tags 字典类型
 // @Param dictId path int true "字典类型编码"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/dict/type/{dictId} [get]
+// @Router /api/v1/dict/type/{id} [get]
 // @Security Bearer
 func (e SysDictType) Get(c *gin.Context) {
 	s := service.SysDictType{}
@@ -83,7 +83,7 @@ func (e SysDictType) Get(c *gin.Context) {
 	e.OK(object, "查询成功")
 }
 
-//Insert 字典类型创建
+// Insert 字典类型创建
 // @Summary 添加字典类型
 // @Description 获取JSON
 // @Tags 字典类型
@@ -125,7 +125,7 @@ func (e SysDictType) Insert(c *gin.Context) {
 // @Product application/json
 // @Param data body dto.SysDictTypeUpdateReq true "body"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/dict/type/{dictId} [put]
+// @Router /api/v1/dict/type/{id} [put]
 // @Security Bearer
 func (e SysDictType) Update(c *gin.Context) {
 	s := service.SysDictType{}

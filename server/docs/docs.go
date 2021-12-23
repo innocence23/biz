@@ -391,7 +391,7 @@ var doc = `{
                 ],
                 "description": "分页列表",
                 "tags": [
-                    "部门"
+                    "部门管理"
                 ],
                 "summary": "分页部门列表数据",
                 "parameters": [
@@ -434,7 +434,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "部门"
+                    "部门管理"
                 ],
                 "summary": "添加部门",
                 "parameters": [
@@ -465,7 +465,7 @@ var doc = `{
                 ],
                 "description": "删除数据",
                 "tags": [
-                    "部门"
+                    "部门管理"
                 ],
                 "summary": "删除部门",
                 "parameters": [
@@ -489,7 +489,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/dept/{deptId}": {
+        "/api/v1/dept/{id}": {
             "get": {
                 "security": [
                     {
@@ -498,7 +498,7 @@ var doc = `{
                 ],
                 "description": "获取JSON",
                 "tags": [
-                    "部门"
+                    "部门管理"
                 ],
                 "summary": "获取部门数据",
                 "parameters": [
@@ -529,7 +529,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "部门"
+                    "部门管理"
                 ],
                 "summary": "修改部门",
                 "parameters": [
@@ -951,7 +951,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/dict/type/{dictId}": {
+        "/api/v1/dict/type/{id}": {
             "get": {
                 "security": [
                     {
@@ -1078,7 +1078,7 @@ var doc = `{
                 ],
                 "description": "获取JSON",
                 "tags": [
-                    "菜单"
+                    "菜单管理"
                 ],
                 "summary": "Menu列表数据",
                 "parameters": [
@@ -1109,7 +1109,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "菜单"
+                    "菜单管理"
                 ],
                 "summary": "创建菜单",
                 "parameters": [
@@ -1140,7 +1140,7 @@ var doc = `{
                 ],
                 "description": "删除数据",
                 "tags": [
-                    "菜单"
+                    "菜单管理"
                 ],
                 "summary": "删除菜单",
                 "parameters": [
@@ -1173,7 +1173,7 @@ var doc = `{
                 ],
                 "description": "获取JSON",
                 "tags": [
-                    "菜单"
+                    "菜单管理"
                 ],
                 "summary": "Menu详情数据",
                 "parameters": [
@@ -1204,7 +1204,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "菜单"
+                    "菜单管理"
                 ],
                 "summary": "修改菜单",
                 "parameters": [
@@ -1247,7 +1247,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "菜单"
+                    "菜单管理"
                 ],
                 "summary": "角色修改使用的菜单列表",
                 "parameters": [
@@ -1278,7 +1278,7 @@ var doc = `{
                 ],
                 "description": "获取JSON",
                 "tags": [
-                    "菜单"
+                    "菜单管理"
                 ],
                 "summary": "根据登录角色名称获取菜单列表数据（左菜单使用）",
                 "responses": {
@@ -1300,7 +1300,7 @@ var doc = `{
                 ],
                 "description": "获取JSON",
                 "tags": [
-                    "岗位"
+                    "岗位管理"
                 ],
                 "summary": "岗位列表数据",
                 "parameters": [
@@ -1349,7 +1349,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "岗位"
+                    "岗位管理"
                 ],
                 "summary": "添加岗位",
                 "parameters": [
@@ -1380,7 +1380,7 @@ var doc = `{
                 ],
                 "description": "删除数据",
                 "tags": [
-                    "岗位"
+                    "岗位管理"
                 ],
                 "summary": "删除岗位",
                 "parameters": [
@@ -1405,6 +1405,35 @@ var doc = `{
             }
         },
         "/api/v1/post/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "获取JSON",
+                "tags": [
+                    "岗位管理"
+                ],
+                "summary": "获取岗位信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "编码",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\": 200, \"data\": [...]}",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            },
             "put": {
                 "security": [
                     {
@@ -1416,7 +1445,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "岗位"
+                    "岗位管理"
                 ],
                 "summary": "修改岗位",
                 "parameters": [
@@ -1428,37 +1457,6 @@ var doc = `{
                         "schema": {
                             "$ref": "#/definitions/dto.SysPostUpdateReq"
                         }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"code\": 200, \"data\": [...]}",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/post/{postId}": {
-            "get": {
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
-                "description": "获取JSON",
-                "tags": [
-                    "岗位"
-                ],
-                "summary": "获取岗位信息",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "编码",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
                     }
                 ],
                 "responses": {
@@ -1963,7 +1961,7 @@ var doc = `{
                 ],
                 "description": "Get JSON",
                 "tags": [
-                    "角色/Role"
+                    "角色管理"
                 ],
                 "summary": "角色列表数据",
                 "parameters": [
@@ -2018,7 +2016,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "角色/Role"
+                    "角色管理"
                 ],
                 "summary": "创建角色",
                 "parameters": [
@@ -2049,7 +2047,7 @@ var doc = `{
                 ],
                 "description": "删除数据",
                 "tags": [
-                    "角色/Role"
+                    "角色管理"
                 ],
                 "summary": "删除用户角色",
                 "parameters": [
@@ -2073,7 +2071,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/role-status/{id}": {
+        "/api/v1/role-status": {
             "put": {
                 "security": [
                     {
@@ -2085,9 +2083,9 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "角色/Role"
+                    "角色管理"
                 ],
-                "summary": "更新角色数据权限",
+                "summary": "修改用户角色",
                 "parameters": [
                     {
                         "description": "body",
@@ -2095,7 +2093,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.RoleDataScopeReq"
+                            "$ref": "#/definitions/dto.UpdateStatusReq"
                         }
                     }
                 ],
@@ -2118,7 +2116,7 @@ var doc = `{
                 ],
                 "description": "获取JSON",
                 "tags": [
-                    "角色/Role"
+                    "角色管理"
                 ],
                 "summary": "获取Role数据",
                 "parameters": [
@@ -2149,7 +2147,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "角色/Role"
+                    "角色管理"
                 ],
                 "summary": "修改用户角色",
                 "parameters": [
@@ -2160,6 +2158,42 @@ var doc = `{
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/dto.SysRoleUpdateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\": 200, \"data\": [...]}",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/roledatascope": {
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "获取JSON",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "更新角色数据权限",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.RoleDataScopeReq"
                         }
                     }
                 ],
@@ -2769,7 +2803,7 @@ var doc = `{
                 ],
                 "description": "获取JSON",
                 "tags": [
-                    "用户"
+                    "用户管理"
                 ],
                 "summary": "列表用户信息数据",
                 "parameters": [
@@ -2789,71 +2823,6 @@ var doc = `{
                     }
                 }
             },
-            "post": {
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
-                "description": "获取JSON",
-                "consumes": [
-                    "application/json"
-                ],
-                "tags": [
-                    "用户"
-                ],
-                "summary": "创建用户",
-                "parameters": [
-                    {
-                        "description": "用户数据",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.SysUserInsertReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"code\": 200, \"data\": [...]}",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/sys-user/{userId}": {
-            "get": {
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
-                "description": "获取JSON",
-                "tags": [
-                    "用户"
-                ],
-                "summary": "获取用户",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "用户编码",
-                        "name": "userId",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"code\": 200, \"data\": [...]}",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    }
-                }
-            },
             "put": {
                 "security": [
                     {
@@ -2865,7 +2834,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "用户"
+                    "用户管理"
                 ],
                 "summary": "修改用户数据",
                 "parameters": [
@@ -2888,6 +2857,40 @@ var doc = `{
                     }
                 }
             },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "获取JSON",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "创建用户",
+                "parameters": [
+                    {
+                        "description": "用户数据",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.SysUserInsertReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\": 200, \"data\": [...]}",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "security": [
                     {
@@ -2896,7 +2899,7 @@ var doc = `{
                 ],
                 "description": "删除数据",
                 "tags": [
-                    "用户"
+                    "用户管理"
                 ],
                 "summary": "删除用户数据",
                 "parameters": [
@@ -2918,7 +2921,66 @@ var doc = `{
                 }
             }
         },
+        "/api/v1/sys-user/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "获取JSON",
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "获取用户",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "用户编码",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\": 200, \"data\": [...]}",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/sys/tables/info": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "获取JSON",
+                "tags": [
+                    "工具 / 生成工具"
+                ],
+                "summary": "获取配置",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "tableName / 数据表名称",
+                        "name": "tableName",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\": 200, \"data\": [...]}",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            },
             "put": {
                 "security": [
                     {
@@ -3145,7 +3207,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "用户"
+                    "用户管理"
                 ],
                 "summary": "重置用户密码",
                 "parameters": [
@@ -3181,7 +3243,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "用户"
+                    "用户管理"
                 ],
                 "summary": "重置密码",
                 "parameters": [
@@ -3217,7 +3279,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "用户"
+                    "用户管理"
                 ],
                 "summary": "修改用户状态",
                 "parameters": [

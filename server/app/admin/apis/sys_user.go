@@ -24,7 +24,7 @@ type SysUser struct {
 // GetPage
 // @Summary 列表用户信息数据
 // @Description 获取JSON
-// @Tags 用户
+// @Tags 用户管理
 // @Param username query string false "username"
 // @Success 200 {string} {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /api/v1/sys-user [get]
@@ -61,10 +61,10 @@ func (e SysUser) GetPage(c *gin.Context) {
 // Get
 // @Summary 获取用户
 // @Description 获取JSON
-// @Tags 用户
-// @Param userId path int true "用户编码"
+// @Tags 用户管理
+// @Param id path int true "用户编码"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/sys-user/{userId} [get]
+// @Router /api/v1/sys-user/{id} [get]
 // @Security Bearer
 func (e SysUser) Get(c *gin.Context) {
 	s := service.SysUser{}
@@ -93,7 +93,7 @@ func (e SysUser) Get(c *gin.Context) {
 // Insert
 // @Summary 创建用户
 // @Description 获取JSON
-// @Tags 用户
+// @Tags 用户管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.SysUserInsertReq true "用户数据"
@@ -128,12 +128,12 @@ func (e SysUser) Insert(c *gin.Context) {
 // Update
 // @Summary 修改用户数据
 // @Description 获取JSON
-// @Tags 用户
+// @Tags 用户管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.SysUserUpdateReq true "body"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/sys-user/{userId} [put]
+// @Router /api/v1/sys-user [put]
 // @Security Bearer
 func (e SysUser) Update(c *gin.Context) {
 	s := service.SysUser{}
@@ -165,10 +165,10 @@ func (e SysUser) Update(c *gin.Context) {
 // Delete
 // @Summary 删除用户数据
 // @Description 删除数据
-// @Tags 用户
+// @Tags 用户管理
 // @Param userId path int true "userId"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/sys-user/{userId} [delete]
+// @Router /api/v1/sys-user [delete]
 // @Security Bearer
 func (e SysUser) Delete(c *gin.Context) {
 	s := service.SysUser{}
@@ -249,7 +249,7 @@ func (e SysUser) InsetAvatar(c *gin.Context) {
 // UpdateStatus 修改用户状态
 // @Summary 修改用户状态
 // @Description 获取JSON
-// @Tags 用户
+// @Tags 用户管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.UpdateSysUserStatusReq true "body"
@@ -286,7 +286,7 @@ func (e SysUser) UpdateStatus(c *gin.Context) {
 // ResetPwd 重置用户密码
 // @Summary 重置用户密码
 // @Description 获取JSON
-// @Tags 用户
+// @Tags 用户管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.ResetSysUserPwdReq true "body"
@@ -323,7 +323,7 @@ func (e SysUser) ResetPwd(c *gin.Context) {
 // UpdatePwd
 // @Summary 重置密码
 // @Description 获取JSON
-// @Tags 用户
+// @Tags 用户管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.PassWord true "body"

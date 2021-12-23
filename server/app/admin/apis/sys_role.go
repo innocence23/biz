@@ -25,7 +25,7 @@ type SysRole struct {
 // GetPage
 // @Summary 角色列表数据
 // @Description Get JSON
-// @Tags 角色/Role
+// @Tags 角色管理
 // @Param roleName query string false "roleName"
 // @Param status query string false "status"
 // @Param roleKey query string false "roleKey"
@@ -63,7 +63,7 @@ func (e SysRole) GetPage(c *gin.Context) {
 // Get
 // @Summary 获取Role数据
 // @Description 获取JSON
-// @Tags 角色/Role
+// @Tags 角色管理
 // @Param roleId path string false "roleId"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /api/v1/role/{id} [get]
@@ -96,7 +96,7 @@ func (e SysRole) Get(c *gin.Context) {
 // Insert
 // @Summary 创建角色
 // @Description 获取JSON
-// @Tags 角色/Role
+// @Tags 角色管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.SysRoleInsertReq true "data"
@@ -140,7 +140,7 @@ func (e SysRole) Insert(c *gin.Context) {
 // Update 修改用户角色
 // @Summary 修改用户角色
 // @Description 获取JSON
-// @Tags 角色/Role
+// @Tags 角色管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.SysRoleUpdateReq true "body"
@@ -180,7 +180,7 @@ func (e SysRole) Update(c *gin.Context) {
 // Delete
 // @Summary 删除用户角色
 // @Description 删除数据
-// @Tags 角色/Role
+// @Tags 角色管理
 // @Param data body dto.SysRoleDeleteReq true "body"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /api/v1/role [delete]
@@ -216,12 +216,12 @@ func (e SysRole) Delete(c *gin.Context) {
 // Update2Status 修改用户角色状态
 // @Summary 修改用户角色
 // @Description 获取JSON
-// @Tags 角色/Role
+// @Tags 角色管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.UpdateStatusReq true "body"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/role-status/{id} [put]
+// @Router /api/v1/role-status [put]
 // @Security Bearer
 func (e SysRole) Update2Status(c *gin.Context) {
 	s := service.SysRole{}
@@ -248,12 +248,12 @@ func (e SysRole) Update2Status(c *gin.Context) {
 // Update2DataScope 更新角色数据权限
 // @Summary 更新角色数据权限
 // @Description 获取JSON
-// @Tags 角色/Role
+// @Tags 角色管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.RoleDataScopeReq true "body"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/role-status/{id} [put]
+// @Router /api/v1/roledatascope [put]
 // @Security Bearer
 func (e SysRole) Update2DataScope(c *gin.Context) {
 	s := service.SysRole{}

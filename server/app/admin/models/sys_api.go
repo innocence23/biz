@@ -69,12 +69,7 @@ func SaveSysApi(message storage.Messager) (err error) {
 				continue
 			}
 
-			if v.HttpMethod != "HEAD" ||
-				strings.Contains(v.RelativePath, "/swagger/") ||
-				strings.Contains(v.RelativePath, "/static/") ||
-				strings.Contains(v.RelativePath, "/form-generator/") ||
-				strings.Contains(v.RelativePath, "/sys/tables") {
-
+			if v.HttpMethod != "HEAD" && strings.Contains(v.RelativePath, "/api/") {
 				// 根据接口方法注释里的@Summary填充接口名称，适用于代码生成器
 				// 可在此处增加配置路径前缀的if判断，只对代码生成的自建应用进行定向的接口名称填充
 				jsonFile, _ := ioutil.ReadFile("docs/swagger.json")
@@ -87,11 +82,16 @@ func SaveSysApi(message storage.Messager) (err error) {
 				}
 				apiTitle, _ := jsonData.Get("paths").Get(urlPath).Get(strings.ToLower(v.HttpMethod)).Get("summary").String()
 				apiTag, _ := jsonData.Get("paths").Get(urlPath).Get(strings.ToLower(v.HttpMethod)).Get("tags").StringArray()
+				apiType := "SYS"
 				if len(apiTag) > 0 {
 					apiTitle = fmt.Sprintf("[%s] %s", apiTag[0], apiTitle)
 				}
+				if len(apiTitle) <= 0 {
+					apiTitle = "[XXX不完整数据]"
+					apiType = "BUS"
+				}
 				err := d.Debug().Where(SysApi{Path: v.RelativePath, Action: v.HttpMethod}).
-					Attrs(SysApi{Handle: v.Handler, Title: apiTitle}).
+					Attrs(SysApi{Handle: v.Handler, Title: apiTitle, Type: apiType}).
 					FirstOrCreate(&SysApi{}).
 					//Update("handle", v.Handler).
 					Error

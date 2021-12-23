@@ -21,7 +21,7 @@ type SysDept struct {
 // GetPage
 // @Summary 分页部门列表数据
 // @Description 分页列表
-// @Tags 部门
+// @Tags 部门管理
 // @Param deptName query string false "deptName"
 // @Param deptId query string false "deptId"
 // @Param position query string false "position"
@@ -53,10 +53,10 @@ func (e SysDept) GetPage(c *gin.Context) {
 // Get
 // @Summary 获取部门数据
 // @Description 获取JSON
-// @Tags 部门
+// @Tags 部门管理
 // @Param deptId path string false "deptId"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/dept/{deptId} [get]
+// @Router /api/v1/dept/{id} [get]
 // @Security Bearer
 func (e SysDept) Get(c *gin.Context) {
 	s := service.SysDept{}
@@ -85,7 +85,7 @@ func (e SysDept) Get(c *gin.Context) {
 // Insert 添加部门
 // @Summary 添加部门
 // @Description 获取JSON
-// @Tags 部门
+// @Tags 部门管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.SysDeptInsertReq true "data"
@@ -121,14 +121,14 @@ func (e SysDept) Insert(c *gin.Context) {
 // Update
 // @Summary 修改部门
 // @Description 获取JSON
-// @Tags 部门
+// @Tags 部门管理
 // @Accept  application/json
 // @Product application/json
 // @Param id path int true "id"
 // @Param data body dto.SysDeptUpdateReq true "body"
 // @Success 200 {string} string	"{"code": 200, "message": "添加成功"}"
 // @Success 200 {string} string	"{"code": -1, "message": "添加失败"}"
-// @Router /api/v1/dept/{deptId} [put]
+// @Router /api/v1/dept/{id} [put]
 // @Security Bearer
 func (e SysDept) Update(c *gin.Context) {
 	s := service.SysDept{}
@@ -155,7 +155,7 @@ func (e SysDept) Update(c *gin.Context) {
 // Delete
 // @Summary 删除部门
 // @Description 删除数据
-// @Tags 部门
+// @Tags 部门管理
 // @Param data body dto.SysDeptDeleteReq true "body"
 // @Success 200 {string} string	"{"code": 200, "message": "删除成功"}"
 // @Success 200 {string} string	"{"code": -1, "message": "删除失败"}"
@@ -189,7 +189,7 @@ func (e SysDept) Get2Tree(c *gin.Context) {
 	req := dto.SysDeptGetPageReq{}
 	err := e.MakeContext(c).
 		MakeOrm().
-		Bind(&req,binding.Form).
+		Bind(&req, binding.Form).
 		MakeService(&s.Service).
 		Errors
 	if err != nil {

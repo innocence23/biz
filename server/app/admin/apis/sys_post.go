@@ -21,7 +21,7 @@ type SysPost struct {
 // GetPage
 // @Summary 岗位列表数据
 // @Description 获取JSON
-// @Tags 岗位
+// @Tags 岗位管理
 // @Param postName query string false "postName"
 // @Param postCode query string false "postCode"
 // @Param postId query string false "postId"
@@ -31,7 +31,7 @@ type SysPost struct {
 // @Security Bearer
 func (e SysPost) GetPage(c *gin.Context) {
 	s := service.SysPost{}
-	req :=dto.SysPostPageReq{}
+	req := dto.SysPostPageReq{}
 	err := e.MakeContext(c).
 		MakeOrm().
 		Bind(&req, binding.Form).
@@ -58,14 +58,14 @@ func (e SysPost) GetPage(c *gin.Context) {
 // Get
 // @Summary 获取岗位信息
 // @Description 获取JSON
-// @Tags 岗位
+// @Tags 岗位管理
 // @Param id path int true "编码"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/post/{postId} [get]
+// @Router /api/v1/post/{id} [get]
 // @Security Bearer
 func (e SysPost) Get(c *gin.Context) {
 	s := service.SysPost{}
-	req :=dto.SysPostGetReq{}
+	req := dto.SysPostGetReq{}
 	err := e.MakeContext(c).
 		MakeOrm().
 		Bind(&req, nil).
@@ -90,7 +90,7 @@ func (e SysPost) Get(c *gin.Context) {
 // Insert
 // @Summary 添加岗位
 // @Description 获取JSON
-// @Tags 岗位
+// @Tags 岗位管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.SysPostInsertReq true "data"
@@ -99,7 +99,7 @@ func (e SysPost) Get(c *gin.Context) {
 // @Security Bearer
 func (e SysPost) Insert(c *gin.Context) {
 	s := service.SysPost{}
-	req :=dto.SysPostInsertReq{}
+	req := dto.SysPostInsertReq{}
 	err := e.MakeContext(c).
 		MakeOrm().
 		Bind(&req, binding.JSON).
@@ -111,7 +111,7 @@ func (e SysPost) Insert(c *gin.Context) {
 		return
 	}
 	req.SetCreateBy(user.GetUserId(c))
-	req.SetUpdateBy(user.GetUserId(c))	
+	req.SetUpdateBy(user.GetUserId(c))
 	err = s.Insert(&req)
 	if err != nil {
 		e.Error(500, err, fmt.Sprintf("新建岗位失败！错误详情：%s", err.Error()))
@@ -123,7 +123,7 @@ func (e SysPost) Insert(c *gin.Context) {
 // Update
 // @Summary 修改岗位
 // @Description 获取JSON
-// @Tags 岗位
+// @Tags 岗位管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.SysPostUpdateReq true "body"
@@ -132,7 +132,7 @@ func (e SysPost) Insert(c *gin.Context) {
 // @Security Bearer
 func (e SysPost) Update(c *gin.Context) {
 	s := service.SysPost{}
-	req :=dto.SysPostUpdateReq{}
+	req := dto.SysPostUpdateReq{}
 	err := e.MakeContext(c).
 		MakeOrm().
 		Bind(&req, binding.JSON, nil).
@@ -157,14 +157,14 @@ func (e SysPost) Update(c *gin.Context) {
 // Delete
 // @Summary 删除岗位
 // @Description 删除数据
-// @Tags 岗位
+// @Tags 岗位管理
 // @Param id body dto.SysPostDeleteReq true "请求参数"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /api/v1/post [delete]
 // @Security Bearer
 func (e SysPost) Delete(c *gin.Context) {
 	s := service.SysPost{}
-	req :=dto.SysPostDeleteReq{}
+	req := dto.SysPostDeleteReq{}
 	err := e.MakeContext(c).
 		MakeOrm().
 		Bind(&req, binding.JSON).

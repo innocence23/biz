@@ -19,7 +19,7 @@ type SysMenu struct {
 // GetPage Menu列表数据
 // @Summary Menu列表数据
 // @Description 获取JSON
-// @Tags 菜单
+// @Tags 菜单管理
 // @Param menuName query string false "menuName"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /api/v1/menu [get]
@@ -43,7 +43,7 @@ func (e SysMenu) GetPage(c *gin.Context) {
 // Get 获取菜单详情
 // @Summary Menu详情数据
 // @Description 获取JSON
-// @Tags 菜单
+// @Tags 菜单管理
 // @Param id path string false "id"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /api/v1/menu/{id} [get]
@@ -74,7 +74,7 @@ func (e SysMenu) Get(c *gin.Context) {
 // Insert 创建菜单
 // @Summary 创建菜单
 // @Description 获取JSON
-// @Tags 菜单
+// @Tags 菜单管理
 // @Accept  application/json
 // @Product application/json
 // @Param data body dto.SysMenuInsertReq true "data"
@@ -108,7 +108,7 @@ func (e SysMenu) Insert(c *gin.Context) {
 // Update 修改菜单
 // @Summary 修改菜单
 // @Description 获取JSON
-// @Tags 菜单
+// @Tags 菜单管理
 // @Accept  application/json
 // @Product application/json
 // @Param id path int true "id"
@@ -142,7 +142,7 @@ func (e SysMenu) Update(c *gin.Context) {
 // Delete 删除菜单
 // @Summary 删除菜单
 // @Description 删除数据
-// @Tags 菜单
+// @Tags 菜单管理
 // @Param data body dto.SysMenuDeleteReq true "body"
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /api/v1/menu [delete]
@@ -172,7 +172,7 @@ func (e SysMenu) Delete(c *gin.Context) {
 // GetMenuRole 根据登录角色名称获取菜单列表数据（左菜单使用）
 // @Summary 根据登录角色名称获取菜单列表数据（左菜单使用）
 // @Description 获取JSON
-// @Tags 菜单
+// @Tags 菜单管理
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /api/v1/menurole [get]
 // @Security Bearer
@@ -201,7 +201,7 @@ func (e SysMenu) GetMenuRole(c *gin.Context) {
 //// GetMenuIDS 获取角色对应的菜单id数组
 //// @Summary 获取角色对应的菜单id数组，设置角色权限使用
 //// @Description 获取JSON
-//// @Tags 菜单
+//// @Tags 菜单管理
 //// @Param id path int true "id"
 //// @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 //// @Router /api/v1/menuids/{id} [get]
@@ -239,7 +239,7 @@ func (e SysMenu) GetMenuRole(c *gin.Context) {
 // GetMenuTreeSelect 根据角色ID查询菜单下拉树结构
 // @Summary 角色修改使用的菜单列表
 // @Description 获取JSON
-// @Tags 菜单
+// @Tags 菜单管理
 // @Accept  application/json
 // @Product application/json
 // @Param roleId path int true "roleId"

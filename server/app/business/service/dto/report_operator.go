@@ -4,25 +4,27 @@ import (
 	"maktub/app/business/models"
 	"maktub/common/dto"
 	common "maktub/common/models"
-     "time"
+
+	"time"
 )
 
 type ReportOperatorGetPageReq struct {
-	dto.Pagination     `search:"-"`
-    Name string `form:"name" search:"type:contains;column:name;table:report_operator" comment:"人员名字"`
-    ReportOperatorOrder
+	dto.Pagination `search:"-"`
+	Id             int    `form:"id" search:"type:exact;column:id;table:report_operator" comment:"ID"`
+	Name           string `form:"name" search:"type:contains;column:name;table:report_operator" comment:"人员名字"`
+	ReportOperatorOrder
 }
 
-type ReportOperatorOrder struct {Id int `form:"idOrder" search:"type:order;column:id;table:report_operator"`
-    Name string `form:"nameOrder" search:"type:order;column:name;table:report_operator"`
-    Phone string `form:"phoneOrder" search:"type:order;column:phone;table:report_operator"`
-    Remark string `form:"remarkOrder" search:"type:order;column:remark;table:report_operator"`
-    CreateBy string `form:"createByOrder" search:"type:order;column:create_by;table:report_operator"`
-    UpdateBy string `form:"updateByOrder" search:"type:order;column:update_by;table:report_operator"`
-    CreatedAt time.Time `form:"createdAtOrder" search:"type:order;column:created_at;table:report_operator"`
-    UpdatedAt time.Time `form:"updatedAtOrder" search:"type:order;column:updated_at;table:report_operator"`
-    DeletedAt time.Time `form:"deletedAtOrder" search:"type:order;column:deleted_at;table:report_operator"`
-    
+type ReportOperatorOrder struct {
+	Id        int       `form:"idOrder" search:"type:order;column:id;table:report_operator"`
+	Name      string    `form:"nameOrder" search:"type:order;column:name;table:report_operator"`
+	Phone     string    `form:"phoneOrder" search:"type:order;column:phone;table:report_operator"`
+	Remark    string    `form:"remarkOrder" search:"type:order;column:remark;table:report_operator"`
+	CreateBy  string    `form:"createByOrder" search:"type:order;column:create_by;table:report_operator"`
+	UpdateBy  string    `form:"updateByOrder" search:"type:order;column:update_by;table:report_operator"`
+	CreatedAt time.Time `form:"createdAtOrder" search:"type:order;column:created_at;table:report_operator"`
+	UpdatedAt time.Time `form:"updatedAtOrder" search:"type:order;column:updated_at;table:report_operator"`
+	DeletedAt time.Time `form:"deletedAtOrder" search:"type:order;column:deleted_at;table:report_operator"`
 }
 
 func (m *ReportOperatorGetPageReq) GetNeedSearch() interface{} {
@@ -30,21 +32,21 @@ func (m *ReportOperatorGetPageReq) GetNeedSearch() interface{} {
 }
 
 type ReportOperatorInsertReq struct {
-    Id int `json:"-" comment:"ID"` // ID
-    Name string `json:"name" comment:"人员名字"`
-    Phone string `json:"phone" comment:"电话"`
-    Remark string `json:"remark" comment:"备注"`
-    common.ControlBy
+	Id     int    `json:"-" comment:"ID"` // ID
+	Name   string `json:"name" comment:"人员名字"`
+	Phone  string `json:"phone" comment:"电话"`
+	Remark string `json:"remark" comment:"备注"`
+	common.ControlBy
 }
 
 func (s *ReportOperatorInsertReq) Generate(model *models.ReportOperator) {
-    if s.Id == 0 {
-        model.Model = common.Model{ Id: s.Id }
-    }
-    model.Name = s.Name
-    model.Phone = s.Phone
-    model.Remark = s.Remark
-    if s.CreateBy != 0 {
+	if s.Id == 0 {
+		model.Model = common.Model{Id: s.Id}
+	}
+	model.Name = s.Name
+	model.Phone = s.Phone
+	model.Remark = s.Remark
+	if s.CreateBy != 0 {
 		model.CreateBy = s.CreateBy
 	}
 	if s.UpdateBy != 0 {
@@ -57,20 +59,20 @@ func (s *ReportOperatorInsertReq) GetId() interface{} {
 }
 
 type ReportOperatorUpdateReq struct {
-    Id int `uri:"id" comment:"ID"` // ID
-    Name string `json:"name" comment:"人员名字"`
-    Phone string `json:"phone" comment:"电话"`
-    Remark string `json:"remark" comment:"备注"`
-    common.ControlBy
+	Id     int    `uri:"id" comment:"ID"` // ID
+	Name   string `json:"name" comment:"人员名字"`
+	Phone  string `json:"phone" comment:"电话"`
+	Remark string `json:"remark" comment:"备注"`
+	common.ControlBy
 }
 
 func (s *ReportOperatorUpdateReq) Generate(model *models.ReportOperator) {
-    if s.Id == 0 {
-        model.Model = common.Model{ Id: s.Id }
-    }
-    model.Name = s.Name
-    model.Phone = s.Phone
-    model.Remark = s.Remark
+	if s.Id == 0 {
+		model.Model = common.Model{Id: s.Id}
+	}
+	model.Name = s.Name
+	model.Phone = s.Phone
+	model.Remark = s.Remark
 }
 
 func (s *ReportOperatorUpdateReq) GetId() interface{} {
@@ -79,8 +81,9 @@ func (s *ReportOperatorUpdateReq) GetId() interface{} {
 
 // ReportOperatorGetReq 功能获取请求参数
 type ReportOperatorGetReq struct {
-     Id int `uri:"id"`
+	Id int `uri:"id"`
 }
+
 func (s *ReportOperatorGetReq) GetId() interface{} {
 	return s.Id
 }

@@ -76,6 +76,7 @@ func registerBaseRouter(v1 *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddlewar
 	api2 := apis.SysDept{}
 	v1auth := v1.Group("").Use(authMiddleware.MiddlewareFunc()).Use(middleware.AuthCheckRole())
 	{
+		//角色设置时的菜单树
 		v1auth.GET("/roleMenuTreeselect/:roleId", api.GetMenuTreeSelect)
 		//v1.GET("/menuTreeselect", api.GetMenuTreeSelect)
 		v1auth.GET("/roleDeptTreeselect/:roleId", api2.GetDeptTreeRoleSelect)

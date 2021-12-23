@@ -308,7 +308,7 @@ func menuCall(menuList *[]models.SysMenu, menu models.SysMenu) models.SysMenu {
 }
 
 // SetMenuRole 获取左侧菜单树使用
-func (e *SysMenu) SetMenuRole(roleName string) (m []models.SysMenu, err error) {
+func (e *SysMenu) GetTopMenuRole(roleName string) (m []models.SysMenu, err error) {
 	menus, err := e.getByRoleName(roleName)
 	m = make([]models.SysMenu, 0)
 	for i := 0; i < len(menus); i++ {
@@ -332,7 +332,7 @@ func (e *SysMenu) getByRoleName(roleName string) ([]models.SysMenu, error) {
 		MenuList = data
 	} else {
 		role.RoleKey = roleName
-		buttons := make([]models.SysMenu,0)
+		buttons := make([]models.SysMenu, 0)
 		err = e.Orm.Debug().Model(&role).Where("role_key = ? ", roleName).Preload("SysMenu", func(db *gorm.DB) *gorm.DB {
 			return db.Where(" menu_type in ('F')").Order("sort")
 		}).Find(&role).Error

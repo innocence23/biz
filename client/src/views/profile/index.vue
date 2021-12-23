@@ -34,7 +34,7 @@
                 </li>
                 <li class="list-group-item">
                   <svg-icon icon-class="date" />创建日期
-                  <div class="pull-right">{{ user.createdAt }}</div>
+                  <div class="pull-right">{{ parseTime(user.createdAt) }}</div>
                 </li>
               </ul>
             </div>

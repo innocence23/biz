@@ -18,14 +18,14 @@ type Report struct {
 	api.Api
 }
 
-// GetPage 获取报告列表
-// @Summary 获取报告列表
-// @Description 获取报告列表
-// @Tags 报告
-// @Param type query string false "查新范围"
+// GetPage 获取报告管理列表
+// @Summary 获取报告管理列表
+// @Description 获取报告管理列表
+// @Tags 报告管理
+// @Param company query string false "委托单位"
+// @Param type query string false "查新范围 国内外"
 // @Param operatorId query string false "查新员"
 // @Param isFinish query string false "是否交费"
-// @Param phone query string false "电话"
 // @Param pageSize query int false "页条数"
 // @Param pageIndex query int false "页码"
 // @Success 200 {object} response.Response{data=response.Page{list=[]models.Report}} "{"code": 200, "data": [...]}"
@@ -44,17 +44,17 @@ func (e Report) GetPage(c *gin.Context) {
 	list := make([]models.Report, 0)
 	var count int64
 	if err := s.GetPage(&req, p, &list, &count); err != nil {
-		e.Error(500, err, fmt.Sprintf("获取报告 失败，\r\n失败信息 %s", err.Error()))
+		e.Error(500, err, fmt.Sprintf("获取报告管理 失败，\r\n失败信息 %s", err.Error()))
 		return
 	}
 
 	e.PageOK(list, int(count), req.GetPageIndex(), req.GetPageSize(), "查询成功")
 }
 
-// Get 获取报告
-// @Summary 获取报告
-// @Description 获取报告
-// @Tags 报告
+// Get 获取报告管理
+// @Summary 获取报告管理
+// @Description 获取报告管理
+// @Tags 报告管理
 // @Param id path string false "id"
 // @Success 200 {object} response.Response{data=models.Report} "{"code": 200, "data": [...]}"
 // @Router /api/v1/report/{id} [get]
@@ -71,17 +71,17 @@ func (e Report) Get(c *gin.Context) {
 
 	p := actions.GetPermissionFromContext(c)
 	if err := s.Get(&req, p, &object); err != nil {
-		e.Error(500, err, fmt.Sprintf("获取报告失败，\r\n失败信息 %s", err.Error()))
+		e.Error(500, err, fmt.Sprintf("获取报告管理失败，\r\n失败信息 %s", err.Error()))
 		return
 	}
 
 	e.OK(object, "查询成功")
 }
 
-// Insert 创建报告
-// @Summary 创建报告
-// @Description 创建报告
-// @Tags 报告
+// Insert 创建报告管理
+// @Summary 创建报告管理
+// @Description 创建报告管理
+// @Tags 报告管理
 // @Accept application/json
 // @Product application/json
 // @Param data body dto.ReportInsertReq true "data"
@@ -101,17 +101,17 @@ func (e Report) Insert(c *gin.Context) {
 	req.SetUpdateBy(user.GetUserId(c))
 
 	if err := s.Insert(&req); err != nil {
-		e.Error(500, err, fmt.Sprintf("创建报告  失败，\r\n失败信息 %s", err.Error()))
+		e.Error(500, err, fmt.Sprintf("创建报告管理  失败，\r\n失败信息 %s", err.Error()))
 		return
 	}
 
 	e.OK(req.GetId(), "创建成功")
 }
 
-// Update 修改报告
-// @Summary 修改报告
-// @Description 修改报告
-// @Tags 报告
+// Update 修改报告管理
+// @Summary 修改报告管理
+// @Description 修改报告管理
+// @Tags 报告管理
 // @Accept application/json
 // @Product application/json
 // @Param data body dto.ReportUpdateReq true "body"
@@ -130,16 +130,16 @@ func (e Report) Update(c *gin.Context) {
 	p := actions.GetPermissionFromContext(c)
 
 	if err := s.Update(&req, p); err != nil {
-		e.Error(500, err, fmt.Sprintf("修改报告 失败，\r\n失败信息 %s", err.Error()))
+		e.Error(500, err, fmt.Sprintf("修改报告管理 失败，\r\n失败信息 %s", err.Error()))
 		return
 	}
 	e.OK(req.GetId(), "修改成功")
 }
 
-// Delete 删除报告
-// @Summary 删除报告
-// @Description 删除报告
-// @Tags 报告
+// Delete 删除报告管理
+// @Summary 删除报告管理
+// @Description 删除报告管理
+// @Tags 报告管理
 // @Param ids body []int false "ids"
 // @Success 200 {object} response.Response	"{"code": 200, "message": "删除成功"}"
 // @Router /api/v1/report [delete]
@@ -157,7 +157,7 @@ func (e Report) Delete(c *gin.Context) {
 	p := actions.GetPermissionFromContext(c)
 
 	if err := s.Remove(&req, p); err != nil {
-		e.Error(500, err, fmt.Sprintf("删除报告失败，\r\n失败信息 %s", err.Error()))
+		e.Error(500, err, fmt.Sprintf("删除报告管理失败，\r\n失败信息 %s", err.Error()))
 		return
 	}
 	e.OK(req.GetId(), "删除成功")

@@ -21,7 +21,7 @@ services:
       - "8080"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.biz-server.rule=Host(`api.biz.test`) && PathPrefix(`/`)"
+      - "traefik.http.routers.biz-server.rule=Host(`api.zyf.test`) && PathPrefix(`/`)"
     environment:
       - ENV=dev
     # env_file: server/.env.dev
@@ -40,7 +40,7 @@ services:
       - "3000:3000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.biz-client.rule=Host(`biz.test`) && PathPrefix(`/`)"
+      - "traefik.http.routers.biz-client.rule=Host(`zyf.test`) && PathPrefix(`/`)"
     volumes:
       - ./client:/app
       - /app/node_modules #avoid overwriting node_modules

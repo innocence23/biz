@@ -4,8 +4,11 @@
         <template #wrapper>
             <el-card class="box-card">
                 <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-                    <el-form-item label="查新范围" prop="type"><el-select v-model="queryParams.type"
-                                               placeholder="报告查新范围" clearable size="small">
+                    <el-form-item label="委托单位" prop="company"><el-input v-model="queryParams.company" placeholder="请输入委托单位" clearable
+                                              size="small" @keyup.enter.native="handleQuery"/>
+                            </el-form-item>
+                        <el-form-item label="查新范围" prop="type"><el-select v-model="queryParams.type"
+                                               placeholder="报告管理查新范围 国内外" clearable size="small">
                                         <el-option
                                                 v-for="dict in typeOptions"
                                                 :key="dict.value"
@@ -25,7 +28,7 @@
                                 </el-select>
                             </el-form-item>
                         <el-form-item label="是否交费" prop="isFinish"><el-select v-model="queryParams.isFinish"
-                                               placeholder="报告是否交费" clearable size="small">
+                                               placeholder="报告管理是否交费" clearable size="small">
                                         <el-option
                                                 v-for="dict in isFinishOptions"
                                                 :key="dict.value"
@@ -34,10 +37,7 @@
                                         />
                                     </el-select>
                             </el-form-item>
-                        <el-form-item label="电话" prop="phone"><el-input v-model="queryParams.phone" placeholder="请输入电话" clearable
-                                              size="small" @keyup.enter.native="handleQuery"/>
-                            </el-form-item>
-                        
+
                     <el-form-item>
                         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
                         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -181,7 +181,7 @@
                 <!-- 添加或修改对话框 -->
                 <el-dialog :title="title" :visible.sync="open" width="500px">
                     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                        
+
                                     <el-form-item label="委托单位" prop="company">
                                         <el-input v-model="form.company" placeholder="委托单位"
                                                       />
@@ -224,13 +224,13 @@
                                             </el-select>
                                     </el-form-item>
 
-                                    <!-- <el-upload ref="sys_app_logo" :headers="headers" 
-                                    :file-list="sys_app_logofileList" :action="sys_app_logoAction" 
+                                    <!-- <el-upload ref="sys_app_logo" :headers="headers"
+                                    :file-list="sys_app_logofileList" :action="sys_app_logoAction"
                                     style="float:left" :before-upload="sys_app_logoBeforeUpload"
                                      list-type="picture-card" :show-file-list="false" :on-success="uploadSuccess">
                                         <i class="el-icon-plus" />
                                       </el-upload> -->
-      
+
                                     <el-form-item label="回执" prop="huizhi" required>
                                     <el-upload :headers="headers" ref="huizhi" :file-list="huizhifileList" :action="huizhiAction" :limit="1" :on-exceed="handleExceed"
                                         :on-preview="handlePreview" :before-upload="huizhiBeforeUpload" :on-success="uploadSuccess1" :on-remove="handleRemove1">
@@ -250,7 +250,7 @@
                                     </el-upload>
                                     </el-form-item>
                                     <el-form-item label="发票" prop="fapiao">
-                                    <el-upload :headers="headers" ref="fapiao" :file-list="fapiaofileList" :action="fapiaoAction" :limit="1" :on-exceed="handleExceed" list-type="picture" 
+                                    <el-upload :headers="headers" ref="fapiao" :file-list="fapiaofileList" :action="fapiaoAction" :limit="1" :on-exceed="handleExceed" list-type="picture"
                                         :on-preview="handlePreview" :before-upload="fapiaoBeforeUpload" :on-success="uploadSuccess4" :on-remove="handleRemove4">
                                         <el-button size="small" type="primary" icon="el-icon-upload">点击上传</el-button>
                                     </el-upload>
@@ -291,7 +291,7 @@
 
 <script>
     import {addReport, delReport, getReport, listReport, updateReport} from '@/api/business/report'
-    
+
     import {listReportOperator } from '@/api/business/report-operator'
     import { getToken } from '@/utils/auth'
 
@@ -322,25 +322,26 @@
                 typeOptions: [],isFinishOptions: [],
                 // 关系表类型
                 operatorIdOptions :[],
-                
+
                 // 查询参数
                 queryParams: {
                     pageIndex: 1,
                     pageSize: 10,
+                    company:undefined,
                     type:undefined,
                     operatorId:undefined,
                     isFinish:undefined,
                     phone:undefined,
-                    
+
                 },
                 // 表单参数
                 form: {
                 },
                 // 表单校验
-                rules: {type:  [ {required: true, message: '查新范围不能为空', trigger: 'blur'} ],
+                rules: {company:  [ {required: true, message: '委托单位不能为空', trigger: 'blur'} ],
+                type:  [ {required: true, message: '查新范围不能为空', trigger: 'blur'} ],
                 operatorId:  [ {required: true, message: '查新员不能为空', trigger: 'blur'} ],
                 isFinish:  [ {required: true, message: '是否交费不能为空', trigger: 'blur'} ],
-                phone:  [ {required: true, message: '电话不能为空', trigger: 'blur'} ],
                 },
                 headers: { 'Authorization': 'Bearer ' + getToken() },
                 huizhiAction: process.env.VUE_APP_BASE_API + '/api/v1/public/uploadFile',
@@ -486,7 +487,7 @@
             handleAdd() {
                 this.reset()
                 this.open = true
-                this.title = '添加报告'
+                this.title = '添加报告管理'
                 this.isEdit = false
             },
             // 多选框选中数据
@@ -536,8 +537,6 @@
             },
             /** 提交按钮 */
             submitForm: function () {
-                console.log(this.$refs['form'])
-                console.log(this.form)
                 this.$refs['form'].validate(valid => {
                     if (valid) {
                         if (this.form.id !== undefined) {

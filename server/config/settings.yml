@@ -12,6 +12,7 @@ settings:
     writertimeout: 2
     # 数据权限功能开关
     enabledp: false
+  #Ssl Enable Pem KeyStr todo https服务
   logger:
     # 日志存放路径
     path: temp/logs

@@ -93,7 +93,6 @@ func run() error {
 	go func() {
 		jobs.InitJob()
 		jobs.Setup(sdk.Runtime.GetDb())
-
 	}()
 
 	if apiCheck {

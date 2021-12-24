@@ -11,6 +11,7 @@ server/common/middleware/demo.go
 server/config/settings.dev.yml
 server/go.sum
 server/run
+server/main
 
 client/node_modules/
 client/dist/

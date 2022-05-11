@@ -54,14 +54,14 @@ services:
       MYSQL_USER: docker
       MYSQL_PASSWORD: secret
     ports:
-      - 33061:3306
+      - 13306:3306
     volumes:
       # - ./server/init.sql:/docker-entrypoint-initdb.d/init.sql
       - mysqldataz:/var/lib/mysql  #不能加一加就错
   redis:
     image: redis:alpine
     ports:
-      - 63791:6379
+      - 16379:6379
     volumes:
       - redisdataz:/data
 
